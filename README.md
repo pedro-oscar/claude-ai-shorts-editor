@@ -2,6 +2,8 @@
 
 Transforme um vídeo longo (podcast, pregação, aula, live, entrevista) em **vários cortes verticais prontos** para Reels, TikTok e Shorts, com **um comando**.
 
+**Site do projeto:** [pedro-oscar.github.io/claude-ai-shorts-editor](https://pedro-oscar.github.io/claude-ai-shorts-editor/): como funciona, exemplos e instalação passo a passo (em português e inglês).
+
 ```bash
 ./ae auto "https://www.youtube.com/watch?v=XXXX"
 ```

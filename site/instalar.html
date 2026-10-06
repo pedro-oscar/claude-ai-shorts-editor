@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt" data-repo="pedro-oscar/claude-ai-shorts-editor"
+      data-title-pt="Instalar — Claude AI Shorts Editor"
+      data-title-en="Install — Claude AI Shorts Editor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instalar — Claude AI Shorts Editor</title>
+<meta name="description" content="Instalação do Claude AI Shorts Editor: três comandos para quem já usa terminal e um passo a passo para Windows, macOS e Linux.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>
+(function(){var r=document.documentElement,g=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
+var t=g('theme');if(t)r.dataset.theme=t;r.dataset.themeEffective=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+var q=new URLSearchParams(location.search).get('lang');var l=(q==='en'||q==='pt')?q:(g('lang')||'pt');r.dataset.lang=l;if(l==='en')r.lang='en';})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main"><span lang="pt-BR">Pular para o conteúdo</span><span lang="en">Skip to content</span></a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="rec" aria-hidden="true"></span><span class="bn-a">Claude AI</span>Shorts Editor</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./"><span lang="pt-BR">Produto</span><span lang="en">Product</span></a>
+      <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+      <a href="instalar.html" aria-current="page"><span lang="pt-BR">Instalar</span><span lang="en">Install</span></a>
+    </nav>
+    <div class="tools">
+      <a class="btn-icon" data-repo-href href="https://github.com/pedro-oscar/claude-ai-shorts-editor" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+      <button class="lang" type="button" data-lang-toggle data-pt-label="Mudar para inglês" data-en-label="Switch to Portuguese"><span data-l="pt">PT</span>&nbsp;/&nbsp;<span data-l="en">EN</span></button>
+      <button class="btn-icon" type="button" data-theme-toggle data-pt-label="Alternar tema claro/escuro" data-en-label="Toggle light/dark theme">
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="btn-icon menu-btn" type="button" aria-expanded="false" aria-controls="mnav" data-pt-label="Abrir menu" data-en-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="wrap mobile-nav" id="mnav" aria-label="Menu">
+    <a href="./"><span lang="pt-BR">Produto</span><span lang="en">Product</span></a>
+    <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+    <a href="instalar.html"><span lang="pt-BR">Instalar</span><span lang="en">Install</span></a>
+    <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor">GitHub</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="page-head">
+  <div class="wrap">
+    <h1 lang="pt-BR">Instalar.</h1>
+    <h1 lang="en">Install.</h1>
+    <p class="lede" lang="pt-BR">O projeto tem um instalador, o <code>instalar.sh</code>, que faz quase tudo sozinho. Você só prepara o computador uma vez e conecta o Claude. Os dois caminhos terminam no mesmo lugar: <b class="ok-line">Tudo pronto.</b></p>
+    <p class="lede" lang="en">The project ships an installer, <code>instalar.sh</code>, that does almost everything on its own. You just prepare your computer once and connect Claude. Both paths end in the same place: <b class="ok-line">Tudo pronto.</b> ("All set.")</p>
+    <div class="switch" role="tablist" id="tabs" aria-label="Tipo de instalação">
+      <button role="tab" id="t-rapida" aria-controls="rapida" aria-selected="true"><span lang="pt-BR">Rápida</span><span lang="en">Quick</span></button>
+      <button role="tab" id="t-passo" aria-controls="passo-a-passo" aria-selected="false" tabindex="-1"><span lang="pt-BR">Passo a passo</span><span lang="en">Step by step</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:48px;padding-bottom:40px">
+  <div class="wrap">
+    <h2 style="font-size:1.6rem" lang="pt-BR">O que você precisa</h2>
+    <h2 style="font-size:1.6rem" lang="en">What you need</h2>
+    <ul class="need" style="margin-top:20px">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4"/></svg><div><b lang="pt-BR">Windows, macOS ou Linux</b><b lang="en">Windows, macOS or Linux</b><span lang="pt-BR">Windows 10 (22H2) ou 11 pelo WSL, macOS 13+, ou Linux (Ubuntu 22.04+, Debian 12+, Fedora, Arch).</span><span lang="en">Windows 10 (22H2) or 11 via WSL, macOS 13+, or Linux (Ubuntu 22.04+, Debian 12+, Fedora, Arch).</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="1.5"/><circle cx="9" cy="12" r="2.5"/><circle cx="16" cy="12" r="2.5"/></svg><div><b lang="pt-BR">Placa de vídeo NVIDIA</b><b lang="en">NVIDIA graphics card</b><span lang="pt-BR">Recomendada: deixa a transcrição muitas vezes mais rápida. Sem ela também funciona, só demora mais.</span><span lang="en">Recommended: makes transcription many times faster. It works without one, just slower.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4-7 8-7s7 2.5 8 7"/></svg><div><b lang="pt-BR">Conta Claude ou chave de API</b><b lang="en">Claude account or API key</b><span lang="pt-BR">Claude Pro, Max, Team ou Enterprise, ou uma chave de API da Anthropic. O plano gratuito não inclui o Claude Code.</span><span lang="en">Claude Pro, Max, Team or Enterprise, or an Anthropic API key. The free plan doesn't include Claude Code.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/></svg><div><b lang="pt-BR">Uns 20 GB livres e internet</b><b lang="en">About 20 GB free and internet</b><span lang="pt-BR">Para as ferramentas e o modelo do Whisper, mais o espaço dos seus vídeos.</span><span lang="en">For the tools and the Whisper model, plus room for your videos.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= RÁPIDA ================= -->
+<section class="panel" id="rapida" role="tabpanel" aria-labelledby="t-rapida">
+  <div class="wrap" style="padding-bottom:88px">
+    <div class="split wide-left">
+      <ol class="qsteps">
+        <li>
+          <h3 lang="pt-BR">Tenha o básico</h3><h3 lang="en">Have the basics</h3>
+          <p lang="pt-BR"><code>git</code>, <code>curl</code>, <code>ffmpeg</code>, Python 3.10+ e Node 18+. No Windows, tudo dentro do Ubuntu do WSL. Faltando algo? Abra o comando do seu sistema:</p>
+          <p lang="en"><code>git</code>, <code>curl</code>, <code>ffmpeg</code>, Python 3.10+ and Node 18+. On Windows, everything inside WSL's Ubuntu. Missing something? Open your system's command:</p>
+          <div class="faq">
+            <details>
+              <summary>Ubuntu / Debian / WSL</summary>
+<pre class="code"><code>sudo apt update
+sudo apt install -y git curl ca-certificates ffmpeg python3 python3-venv
+sudo apt install -y libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libgbm1 libxrandr2 libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libpango-1.0-0 libcairo2 libcups2 fonts-noto-color-emoji
+sudo apt install -y libasound2 || sudo apt install -y libasound2t64
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            </details>
+            <details>
+              <summary>macOS (Homebrew)</summary>
+<pre class="code"><code>brew install git python@3.12 node ffmpeg bash</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            </details>
+            <details>
+              <summary>Fedora</summary>
+<pre class="code"><code>sudo dnf install -y git curl python3 nodejs ffmpeg-free nss atk at-spi2-atk libdrm libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm pango cairo alsa-lib cups-libs google-noto-emoji-color-fonts</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            </details>
+            <details>
+              <summary>Arch / Manjaro</summary>
+<pre class="code"><code>sudo pacman -S --needed git curl python nodejs npm ffmpeg nss atk at-spi2-atk libxkbcommon libxcomposite libxdamage libxrandr mesa pango cairo alsa-lib libcups noto-fonts-emoji</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            </details>
+          </div>
+        </li>
+        <li>
+          <h3 lang="pt-BR">Claude Code com login</h3><h3 lang="en">Claude Code, logged in</h3>
+          <p lang="pt-BR">Instale, abra o <code>claude</code> uma vez, entre com a sua conta e saia com <code>/exit</code>.</p>
+          <p lang="en">Install it, open <code>claude</code> once, sign in with your account and leave with <code>/exit</code>.</p>
+<pre class="code"><code>curl -fsSL https://claude.ai/install.sh | bash
+claude</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+        </li>
+        <li>
+          <h3 lang="pt-BR">Clone e instale</h3><h3 lang="en">Clone and install</h3>
+          <p lang="pt-BR">O instalador liga a skill <code>corte-viral</code>, baixa o video-use, o Whisper, o yt-dlp e o Remotion, e termina rodando a verificação. Leva de 5 a 15 minutos.</p>
+          <p lang="en">The installer links the <code>corte-viral</code> skill, downloads video-use, Whisper, yt-dlp and Remotion, and finishes by running the check. Takes 5 to 15 minutes.</p>
+<pre class="code"><code>git clone https://github.com/pedro-oscar/claude-ai-shorts-editor.git
+cd claude-ai-shorts-editor
+./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+        </li>
+        <li>
+          <h3 lang="pt-BR">Primeiro corte</h3><h3 lang="en">First cut</h3>
+          <p lang="pt-BR">Em prévia, meia resolução. Gostou? <code>./ae produzir</code> gera a versão final.</p>
+          <p lang="en">As a half-resolution preview. Like it? <code>./ae produzir</code> renders the final version.</p>
+<pre class="code"><code>./ae auto "https://www.youtube.com/watch?v=XXXX" --rapido</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+        </li>
+      </ol>
+      <div style="display:grid;gap:18px;align-content:start">
+        <div class="callout tip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.5 1 .5 1.6V16h6v-.5c0-.6 0-1.2.5-1.6A6 6 0 0 0 12 3Z"/></svg>
+          <p lang="pt-BR">Sem navegador na máquina? Gere um token com <code>claude setup-token</code> e coloque no <code>.env</code> do projeto como <code>CLAUDE_CODE_OAUTH_TOKEN=…</code>. Com chave de API, use <code>ANTHROPIC_API_KEY=…</code>.</p>
+          <p lang="en">No browser on the machine? Create a token with <code>claude setup-token</code> and put it in the project's <code>.env</code> as <code>CLAUDE_CODE_OAUTH_TOKEN=…</code>. With an API key, use <code>ANTHROPIC_API_KEY=…</code>.</p>
+        </div>
+        <div class="callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12l4 4L19 6"/></svg>
+          <div>
+            <p lang="pt-BR">Quer testar sem vídeo nenhum antes? <code>./ae demo</code> gera <code>publicar/demo.mp4</code> com todos os tipos de animação.</p>
+            <p lang="en">Want to test without any video first? <code>./ae demo</code> creates <code>publicar/demo.mp4</code> with every kind of animation.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg>
+          <div>
+            <p lang="pt-BR">Para atualizar, rode de novo o instalador: ele pode ser rodado quantas vezes quiser.</p>
+            <p lang="en">To update, run the installer again: it's safe to run as many times as you like.</p>
+            <div class="cmd" style="margin-top:8px"><code><span class="p">$ </span>git pull && ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          </div>
+        </div>
+        <p class="muted" style="font-size:.92rem" lang="pt-BR">Travou em algo? O <a href="#passo-a-passo" data-goto-tab="passo-a-passo">passo a passo</a> explica cada comando e tem uma tabela de problemas comuns.</p>
+        <p class="muted" style="font-size:.92rem" lang="en">Stuck? The <a href="#passo-a-passo" data-goto-tab="passo-a-passo">step-by-step guide</a> explains every command and has a troubleshooting table.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PASSO A PASSO ================= -->
+<section class="panel" id="passo-a-passo" role="tabpanel" aria-labelledby="t-passo" hidden>
+  <div class="wrap" style="padding-bottom:88px">
+    <p class="lede" lang="pt-BR">Sem pressa. Cada etapa diz quanto tempo leva e o que você deve ver na tela. Você vai copiar e colar comandos; não precisa entender todos.</p>
+    <p class="lede" lang="en">No rush. Each step says how long it takes and what you should see on screen. You'll copy and paste commands; you don't need to understand all of them.</p>
+
+    <ol class="guide">
+      <!-- 1: preparar o sistema -->
+      <li>
+        <div class="body">
+          <span class="time" lang="pt-BR">~ 20–40 min, só uma vez</span><span class="time" lang="en">~ 20–40 min, once</span>
+          <h3 lang="pt-BR">Prepare o computador</h3><h3 lang="en">Prepare your computer</h3>
+          <p lang="pt-BR">Escolha o seu sistema.</p>
+          <p lang="en">Pick your system.</p>
+          <div class="switch os" role="tablist" aria-label="Sistema" data-os-tabs data-store="os" style="margin-top:0">
+            <button role="tab" id="t-win" aria-controls="os-win" aria-selected="true">Windows</button>
+            <button role="tab" id="t-mac" aria-controls="os-mac" aria-selected="false" tabindex="-1">macOS</button>
+            <button role="tab" id="t-linux" aria-controls="os-linux" aria-selected="false" tabindex="-1">Linux</button>
+          </div>
+
+          <!-- Windows -->
+          <div class="panel os-panel" id="os-win" role="tabpanel" aria-labelledby="t-win">
+            <p lang="pt-BR">No Windows o projeto roda dentro do <b>WSL</b>, um "Linux dentro do Windows" oficial da Microsoft. O Windows sem WSL não é suportado. Precisa do Windows 10 22H2 ou do 11.</p>
+            <p lang="en">On Windows the project runs inside <b>WSL</b>, Microsoft's official "Linux inside Windows". Windows without WSL isn't supported. You need Windows 10 22H2 or 11.</p>
+
+            <h4 lang="pt-BR">a. Driver da placa de vídeo (só se tiver NVIDIA)</h4><h4 lang="en">a. Graphics driver (NVIDIA only)</h4>
+            <ol lang="pt-BR">
+              <li>Não sabe se tem NVIDIA? Aperte <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd>, vá em <b>Desempenho</b> e veja se aparece uma <b>GPU NVIDIA</b>.</li>
+              <li>Instale o driver mais recente em nvidia.com/drivers ou pelo NVIDIA App, e reinicie.</li>
+              <li>Instale o driver <b>só no Windows</b>. Dentro do Ubuntu não se instala driver: ele usa o do Windows.</li>
+            </ol>
+            <ol lang="en">
+              <li>Not sure you have NVIDIA? Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd>, go to <b>Performance</b> and look for an <b>NVIDIA GPU</b>.</li>
+              <li>Install the latest driver from nvidia.com/drivers or the NVIDIA App, and restart.</li>
+              <li>Install the driver <b>on Windows only</b>. Don't install a driver inside Ubuntu: it uses the Windows one.</li>
+            </ol>
+
+            <h4 lang="pt-BR">b. Instale o WSL com Ubuntu</h4><h4 lang="en">b. Install WSL with Ubuntu</h4>
+            <ol lang="pt-BR">
+              <li>Menu Iniciar → digite <b>PowerShell</b> → botão direito → <b>Executar como administrador</b>.</li>
+              <li>Cole o comando abaixo e aperte <kbd>Enter</kbd>. Quando terminar, <b>reinicie o computador</b>.</li>
+              <li>Depois, abra <b>Ubuntu</b> pelo menu Iniciar. Ele pede um <b>nome de usuário</b> (minúsculas, sem espaço, ex.: <code>maria</code>) e uma <b>senha</b>. Anote a senha.</li>
+            </ol>
+            <ol lang="en">
+              <li>Start menu → type <b>PowerShell</b> → right-click → <b>Run as administrator</b>.</li>
+              <li>Paste the command below and press <kbd>Enter</kbd>. When it's done, <b>restart your computer</b>.</li>
+              <li>Then open <b>Ubuntu</b> from the Start menu. It asks for a <b>username</b> (lowercase, no spaces, e.g. <code>maria</code>) and a <b>password</b>. Write the password down.</li>
+            </ol>
+            <div class="cmd"><code><span class="p">PS&gt; </span>wsl --install -d Ubuntu-22.04</code><button class="copy" type="button" data-copy="wsl --install -d Ubuntu-22.04"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+            <div class="term" role="img" aria-label="Janela do Ubuntu pedindo usuário e senha">
+              <div class="term-bar"><i></i><i></i><i></i><span>Ubuntu 22.04 LTS</span></div>
+<pre>Installing, this may take a few minutes...
+Please create a default UNIX user account.
+Enter new UNIX username: <span class="c-str">maria</span>
+New password: <span class="c-dim">            <span lang="pt-BR">← nada aparece enquanto você digita; é normal</span><span lang="en">← nothing shows as you type; that's normal</span></span>
+Retype new password:
+passwd: password updated successfully
+Installation successful!
+<span class="c-ok">maria@PC</span>:<span class="c-key">~</span>$ <span class="cursor"></span></pre>
+            </div>
+            <p lang="pt-BR">Essa janela preta é o <b>terminal do Ubuntu</b>. <b>Todos os comandos daqui para a frente são colados nela.</b></p>
+            <p lang="en">That black window is the <b>Ubuntu terminal</b>. <b>Every command from here on is pasted into it.</b></p>
+            <div class="tablewrap">
+              <table class="ref">
+                <thead><tr><th lang="pt-BR">quero…</th><th lang="en">I want to…</th><th lang="pt-BR">faça</th><th lang="en">do</th></tr></thead>
+                <tbody>
+                  <tr><td style="white-space:normal"><span lang="pt-BR">colar no terminal</span><span lang="en">paste into the terminal</span></td><td><span lang="pt-BR">botão direito do mouse, ou <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></span><span lang="en">right-click, or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></span></td></tr>
+                  <tr><td style="white-space:normal"><span lang="pt-BR">abrir a pasta atual no Explorer</span><span lang="en">open the current folder in Explorer</span></td><td><code>explorer.exe .</code></td></tr>
+                  <tr><td style="white-space:normal"><span lang="pt-BR">achar meus vídeos do Windows</span><span lang="en">find my Windows videos</span></td><td><code>/mnt/c/Users/SEU_USUARIO/Videos</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 lang="pt-BR">c. Atualize o Ubuntu e instale os programas</h4><h4 lang="en">c. Update Ubuntu and install the programs</h4>
+            <p lang="pt-BR">Vai pedir a senha que você criou. Se tiver NVIDIA, o último comando (<code>nvidia-smi</code>) deve mostrar uma tabela com o nome da placa.</p>
+            <p lang="en">It will ask for the password you created. If you have NVIDIA, the last command (<code>nvidia-smi</code>) should show a table with your card's name.</p>
+<pre class="code"><code>sudo apt update && sudo apt upgrade -y
+sudo apt install -y git curl ca-certificates ffmpeg python3 python3-venv
+sudo apt install -y libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libgbm1 libxrandr2 libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libpango-1.0-0 libcairo2 libcups2 fonts-noto-color-emoji
+sudo apt install -y libasound2 || sudo apt install -y libasound2t64
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+nvidia-smi</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            <div class="callout warn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg>
+              <p lang="pt-BR">Deixe o projeto <b>dentro do Ubuntu</b> (na pasta pessoal, <code>~</code>), nunca em <code>/mnt/c/…</code>: por lá tudo fica muito mais lento.</p>
+              <p lang="en">Keep the project <b>inside Ubuntu</b> (in your home folder, <code>~</code>), never under <code>/mnt/c/…</code>: everything is much slower there.</p>
+            </div>
+          </div>
+
+          <!-- macOS -->
+          <div class="panel os-panel" id="os-mac" role="tabpanel" aria-labelledby="t-mac" hidden>
+            <p lang="pt-BR">macOS 13 (Ventura) ou mais novo, chip Apple ou Intel. Macs não têm NVIDIA, então a transcrição roda no processador: funciona, mas é bem mais lenta. Em vídeos longos, use <code>--trecho</code> para processar só a parte que interessa.</p>
+            <p lang="en">macOS 13 (Ventura) or newer, Apple chip or Intel. Macs have no NVIDIA, so transcription runs on the CPU: it works, but it's much slower. For long videos, use <code>--trecho</code> to process only the part you need.</p>
+
+            <h4 lang="pt-BR">a. Abra o Terminal</h4><h4 lang="en">a. Open Terminal</h4>
+            <p lang="pt-BR">Aperte <kbd>⌘</kbd> + <kbd>Espaço</kbd>, digite <b>Terminal</b> e aperte <kbd>Enter</kbd>.</p>
+            <p lang="en">Press <kbd>⌘</kbd> + <kbd>Space</kbd>, type <b>Terminal</b> and press <kbd>Enter</kbd>.</p>
+
+            <h4 lang="pt-BR">b. Instale o Homebrew</h4><h4 lang="en">b. Install Homebrew</h4>
+            <div class="cmd"><code><span class="p">$ </span>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+            <ul lang="pt-BR">
+              <li>Ele pede a <b>senha do Mac</b>. Ao digitar, nada aparece; é normal.</li>
+              <li>No fim aparece <b>"Next steps"</b> com 2 ou 3 comandos (começando com <code>echo</code> e <code>eval</code>). <b>Copie e rode esses comandos.</b></li>
+              <li>Feche o Terminal e abra de novo. <code>brew --version</code> deve responder.</li>
+            </ul>
+            <ul lang="en">
+              <li>It asks for your <b>Mac password</b>. Nothing shows as you type; that's normal.</li>
+              <li>At the end you'll see <b>"Next steps"</b> with 2 or 3 commands (starting with <code>echo</code> and <code>eval</code>). <b>Copy and run them.</b></li>
+              <li>Close Terminal and open it again. <code>brew --version</code> should answer.</li>
+            </ul>
+
+            <h4 lang="pt-BR">c. Instale os programas</h4><h4 lang="en">c. Install the programs</h4>
+            <p lang="pt-BR">Inclui um <code>bash</code> novo: o do macOS é de 2007 e os scripts do projeto precisam da versão 4 ou maior.</p>
+            <p lang="en">Includes a new <code>bash</code>: macOS ships one from 2007 and the project's scripts need version 4 or newer.</p>
+<pre class="code"><code>brew install git python@3.12 node ffmpeg bash</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            <p lang="pt-BR">Feche e abra o Terminal e confira: <code>bash --version</code> deve mostrar <b>5</b> ou mais, <code>node -v</code> <b>v18</b> ou mais e <code>python3 --version</code> <b>3.10</b> ou mais.</p>
+            <p lang="en">Close and reopen Terminal and check: <code>bash --version</code> should show <b>5</b> or higher, <code>node -v</code> <b>v18</b> or higher and <code>python3 --version</code> <b>3.10</b> or higher.</p>
+          </div>
+
+          <!-- Linux -->
+          <div class="panel os-panel" id="os-linux" role="tabpanel" aria-labelledby="t-linux" hidden>
+            <p lang="pt-BR">Os comandos com <code>sudo</code> pedem a sua senha; ao digitar, nada aparece.</p>
+            <p lang="en">Commands with <code>sudo</code> ask for your password; nothing shows as you type.</p>
+            <h4>Ubuntu 22.04+ / Debian 12+</h4>
+<pre class="code"><code>sudo apt update
+sudo apt install -y git curl ca-certificates ffmpeg python3 python3-venv
+sudo apt install -y libnss3 libdbus-1-3 libatk1.0-0 libatk-bridge2.0-0 libgbm1 libxrandr2 libxkbcommon0 libxfixes3 libxcomposite1 libxdamage1 libpango-1.0-0 libcairo2 libcups2 fonts-noto-color-emoji
+sudo apt install -y libasound2 || sudo apt install -y libasound2t64
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+            <p lang="pt-BR">Tem NVIDIA? Instale o driver e reinicie. Depois, <code>nvidia-smi</code> deve mostrar a placa. Não precisa do CUDA Toolkit: o projeto baixa o que precisa.</p>
+            <p lang="en">Have NVIDIA? Install the driver and restart. Afterwards, <code>nvidia-smi</code> should show the card. You don't need the CUDA Toolkit: the project downloads what it needs.</p>
+            <div class="cmd"><code><span class="p">$ </span>sudo ubuntu-drivers install && sudo reboot</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+            <div class="faq">
+              <details>
+                <summary>Fedora</summary>
+<pre class="code"><code>sudo dnf install -y git curl python3 nodejs ffmpeg-free nss atk at-spi2-atk libdrm libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm pango cairo alsa-lib cups-libs google-noto-emoji-color-fonts</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+                <div><p lang="pt-BR">O <code>ffmpeg-free</code> não tem alguns codecs. Se der erro ao cortar, instale o ffmpeg completo pelo RPM Fusion.</p><p lang="en"><code>ffmpeg-free</code> lacks some codecs. If cutting fails, install the full ffmpeg from RPM Fusion.</p></div>
+              </details>
+              <details>
+                <summary>Arch / Manjaro</summary>
+<pre class="code"><code>sudo pacman -S --needed git curl python nodejs npm ffmpeg nss atk at-spi2-atk libxkbcommon libxcomposite libxdamage libxrandr mesa pango cairo alsa-lib libcups noto-fonts-emoji</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+              </details>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 2: Claude Code -->
+      <li>
+        <div class="body">
+          <span class="time">~ 5 min</span>
+          <h3 lang="pt-BR">Instale e conecte o Claude Code</h3><h3 lang="en">Install and connect Claude Code</h3>
+          <p lang="pt-BR">O Claude Code é o programa que deixa o Claude trabalhar no seu computador: ele lê a transcrição, escolhe os cortes, escreve o roteiro e revisa os vídeos.</p>
+          <p lang="en">Claude Code is the program that lets Claude work on your computer: it reads the transcript, picks the cuts, writes the script and reviews the videos.</p>
+          <div class="cmd"><code><span class="p">$ </span>curl -fsSL https://claude.ai/install.sh | bash</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          <ol lang="pt-BR">
+            <li><b>Feche o terminal e abra de novo.</b> <code>claude --version</code> deve mostrar algo como <code>2.1.xxx (Claude Code)</code>. No Mac também dá: <code>brew install --cask claude-code</code>.</li>
+            <li>Digite <code>claude</code> e aperte <kbd>Enter</kbd>. Um link abre no navegador (no WSL, o do Windows; se não abrir, copie o link do terminal). <b>Entre com a sua conta</b> e autorize.</li>
+            <li>Quando o Claude estiver pronto para conversar, digite <code>/exit</code> para sair.</li>
+            <li>Teste o modo automático, que é o que o projeto usa. Deve responder <b>OK</b>.</li>
+          </ol>
+          <ol lang="en">
+            <li><b>Close the terminal and open it again.</b> <code>claude --version</code> should show something like <code>2.1.xxx (Claude Code)</code>. On a Mac you can also use <code>brew install --cask claude-code</code>.</li>
+            <li>Type <code>claude</code> and press <kbd>Enter</kbd>. A link opens in your browser (on WSL, the Windows one; if it doesn't, copy the link from the terminal). <b>Sign in with your account</b> and authorize.</li>
+            <li>When Claude is ready to chat, type <code>/exit</code> to leave.</li>
+            <li>Test the automatic mode, which is what the project uses. It should answer <b>OK</b>.</li>
+          </ol>
+          <div class="cmd"><code><span class="p">$ </span>claude -p "Responda só: OK"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          <div class="callout tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.5 1 .5 1.6V16h6v-.5c0-.6 0-1.2.5-1.6A6 6 0 0 0 12 3Z"/></svg>
+            <p lang="pt-BR">Quanto consome? Cada vídeo usa duas sessões do Claude (roteiro e revisão). No teste com 10 minutos de vídeo e 2 cortes, equivaleu a uns US$ 4,60 em preço de API. Com Pro/Max, entra no limite do plano e não é cobrado à parte.</p>
+            <p lang="en">How much does it use? Each video takes two Claude sessions (script and review). In the 10-minute, 2-cut test it came to about US$4.60 at API prices. With Pro/Max it counts against your plan limit and isn't billed separately.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- 3: projeto -->
+      <li>
+        <div class="body">
+          <span class="time" lang="pt-BR">~ 5–15 min, depende da internet</span><span class="time" lang="en">~ 5–15 min, depends on your connection</span>
+          <h3 lang="pt-BR">Baixe o projeto e rode o instalador</h3><h3 lang="en">Get the project and run the installer</h3>
+<pre class="code"><code>cd ~
+git clone https://github.com/pedro-oscar/claude-ai-shorts-editor.git
+cd claude-ai-shorts-editor
+./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+          <p lang="pt-BR">O instalador faz sozinho, em 7 etapas:</p>
+          <p lang="en">The installer does this on its own, in 7 steps:</p>
+          <ol lang="pt-BR">
+            <li>confere se os programas do passo 1 estão instalados (e diz o que falta);</li>
+            <li>liga a skill <b>corte-viral</b>, as instruções do Claude, em <code>~/.claude/skills/</code>;</li>
+            <li>baixa a skill <b>video-use</b>, que corta os vídeos;</li>
+            <li>instala o Whisper (transcrição) e o OpenCV (rosto), e as bibliotecas da GPU se houver NVIDIA;</li>
+            <li>instala o <b>yt-dlp</b>, que baixa vídeos do YouTube;</li>
+            <li>cria a pasta <code>remotion/</code> e baixa o Remotion e o navegador que ele usa para desenhar os vídeos;</li>
+            <li>dá os toques finais e roda a verificação.</li>
+          </ol>
+          <ol lang="en">
+            <li>checks that the programs from step 1 are installed (and says what's missing);</li>
+            <li>links the <b>corte-viral</b> skill, Claude's instructions, into <code>~/.claude/skills/</code>;</li>
+            <li>downloads the <b>video-use</b> skill, which cuts the videos;</li>
+            <li>installs Whisper (transcription) and OpenCV (faces), plus GPU libraries if you have NVIDIA;</li>
+            <li>installs <b>yt-dlp</b>, which downloads YouTube videos;</li>
+            <li>creates the <code>remotion/</code> folder and downloads Remotion and the browser it uses to draw the videos;</li>
+            <li>finishes up and runs the check.</li>
+          </ol>
+          <p lang="pt-BR">O fim esperado é uma lista de ✓ terminando em <b class="ok-line">Tudo pronto.</b> Sem NVIDIA aparece um <b>!</b> no lugar da GPU, e tudo bem. Cada <b>✗</b> diz como corrigir.</p>
+          <p lang="en">The expected ending is a list of ✓ ending in <b class="ok-line">Tudo pronto.</b> Without NVIDIA you'll see a <b>!</b> for the GPU, and that's fine. Each <b>✗</b> tells you how to fix it.</p>
+          <div class="term" role="img" aria-label="Fim do instalador terminando em Tudo pronto">
+            <div class="term-bar"><i></i><i></i><i></i><span>maria@PC: ~/claude-ai-shorts-editor</span></div>
+<pre><span class="c-head">== 7/7 Toques finais</span>
+  <span class="c-ok">✓</span> permissões e .env
+  <span class="c-ok">✓</span> skills oficiais do Remotion para o Claude
+
+Conferindo tudo…
+<span class="c-head">== Ferramentas</span>
+  <span class="c-ok">✓</span> ffmpeg ffmpeg version 4.4.2-0ubuntu0.22.04.1
+  <span class="c-ok">✓</span> yt-dlp 2026.08.19
+  <span class="c-ok">✓</span> claude 2.1.291 (Claude Code)
+<span class="c-dim">  …</span>
+<span class="c-head">== GPU</span>
+  <span class="c-ok">✓</span> GPU 0: NVIDIA GeForce RTX 4090
+<span class="c-head">== Skills</span>
+  <span class="c-ok">✓</span> corte-viral em /home/maria/.claude/skills/corte-viral
+  <span class="c-ok">✓</span> faster-whisper enxerga a GPU
+<span class="c-head">== Claude</span>
+  <span class="c-ok">✓</span> claude -p autenticado
+
+<span class="c-ok">Tudo pronto.</span>
+
+Próximo passo: ./ae demo</pre>
+          </div>
+          <div class="callout tip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.5 1 .5 1.6V16h6v-.5c0-.6 0-1.2.5-1.6A6 6 0 0 0 12 3Z"/></svg>
+            <p lang="pt-BR">Na primeira transcrição o programa baixa o modelo do Whisper, cerca de 3 GB. Isso acontece uma vez só.</p>
+            <p lang="en">On the first transcription the program downloads the Whisper model, about 3 GB. That happens only once.</p>
+          </div>
+          <p lang="pt-BR"><b>Daqui em diante, sempre que for usar o projeto,</b> abra o terminal e entre na pasta: <code>cd ~/claude-ai-shorts-editor</code></p>
+          <p lang="en"><b>From now on, whenever you use the project,</b> open the terminal and enter the folder: <code>cd ~/claude-ai-shorts-editor</code></p>
+        </div>
+      </li>
+
+      <!-- 4: demo -->
+      <li>
+        <div class="body">
+          <span class="time">~ 1 min</span>
+          <h3 lang="pt-BR">Teste com a demonstração</h3><h3 lang="en">Test with the demo</h3>
+          <p lang="pt-BR">Gera <code>publicar/demo.mp4</code>, um reel de exemplo com todos os tipos de animação, sem vídeo de fundo. Se o vídeo abrir, a instalação está completa.</p>
+          <p lang="en">Creates <code>publicar/demo.mp4</code>, a sample reel with every kind of animation and no background video. If the video opens, installation is complete.</p>
+          <div class="cmd"><code><span class="p">$ </span>./ae demo</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          <p lang="pt-BR">Para abrir a pasta: <code>explorer.exe publicar</code> no Windows, <code>open publicar</code> no Mac, <code>xdg-open publicar</code> no Linux.</p>
+          <p lang="en">To open the folder: <code>explorer.exe publicar</code> on Windows, <code>open publicar</code> on a Mac, <code>xdg-open publicar</code> on Linux.</p>
+        </div>
+      </li>
+
+      <!-- 5: primeiro corte -->
+      <li>
+        <div class="body">
+          <span class="time" lang="pt-BR">~ 30 min, rodando sozinho</span><span class="time" lang="en">~ 30 min, running on its own</span>
+          <h3 lang="pt-BR">Seus primeiros cortes</h3><h3 lang="en">Your first cuts</h3>
+          <p lang="pt-BR">Comece pequeno: 10 minutos de um vídeo, 2 cortes, em prévia. Troque o endereço pelo link de um vídeo seu, <b>entre aspas</b>. Para um arquivo do computador, use o caminho dele (no Windows, <code>/mnt/c/Users/SEU_USUARIO/Videos/…</code>).</p>
+          <p lang="en">Start small: 10 minutes of a video, 2 cuts, as a preview. Replace the address with a link to one of your videos, <b>in quotes</b>. For a file on your computer, use its path (on Windows, <code>/mnt/c/Users/YOUR_USER/Videos/…</code>).</p>
+          <div class="cmd"><code><span class="p">$ </span>./ae auto "https://www.youtube.com/watch?v=XXXX" --trecho 10:00 20:00 --cortes 2 --rapido</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          <div class="term" role="img" aria-label="O que aparece durante o ./ae auto">
+            <div class="term-bar"><i></i><i></i><i></i><span>maria@PC: ~/claude-ai-shorts-editor</span></div>
+<pre><span class="c-head">== 1/5 Fonte</span>                    <span class="c-dim"><span lang="pt-BR">baixa o vídeo</span><span lang="en">downloads the video</span></span>
+<span class="c-head">== 2/5 Transcrição</span>              <span class="c-dim"><span lang="pt-BR">transcreve o áudio</span><span lang="en">transcribes the audio</span></span>
+<span class="c-head">== 3/5 Roteiro (Claude)</span>         <span class="c-dim"><span lang="pt-BR">escolhe os cortes e escreve</span><span lang="en">picks cuts and writes</span></span>
+  → Read edit/takes_packed.md   <span class="c-dim"><span lang="pt-BR">cada ação do Claude aparece com →</span><span lang="en">each Claude action shows with →</span></span>
+<span class="c-head">== 4/5 Produção</span>                 <span class="c-dim"><span lang="pt-BR">corta, enquadra, legenda, anima</span><span lang="en">cuts, frames, captions, animates</span></span>
+  [1/2] c01 — A série que uniu a família
+<span class="c-head">== 5/5 Revisão do Claude</span>        <span class="c-dim"><span lang="pt-BR">olha os reels e corrige</span><span lang="en">reviews and fixes</span></span>
+<span class="c-head">== Pronto em 28 min</span></pre>
+          </div>
+          <p lang="pt-BR">Pode deixar rodando e fazer outra coisa, mas <b>não feche o terminal</b> até aparecer "Pronto". As prévias ficam em <code>publicar/rapido/</code> e o porquê de cada corte em <code>edit/roteiros/</code>. Gostou? <code>./ae produzir</code> gera a versão final. Quer mudar algo? <code>./ae revisar --pedido "o que mudar"</code>.</p>
+          <p lang="en">You can leave it running and do something else, but <b>don't close the terminal</b> until it says "Pronto" (done). Previews land in <code>publicar/rapido/</code> and the reasoning for each cut in <code>edit/roteiros/</code>. Like it? <code>./ae produzir</code> renders the final version. Want changes? <code>./ae revisar --pedido "what to change"</code>.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div style="margin-top:56px">
+      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)" lang="pt-BR">Problemas comuns</h2>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem)" lang="en">Common problems</h2>
+      <p class="muted" style="margin-top:8px" lang="pt-BR">Primeiro passo sempre: <code>./ae verificar</code>. Cada linha com ✗ diz o que corrigir.</p>
+      <p class="muted" style="margin-top:8px" lang="en">Always start with <code>./ae verificar</code>. Every ✗ line says what to fix.</p>
+      <div class="tablewrap" style="margin-top:20px">
+        <table class="ref">
+          <thead><tr><th lang="pt-BR">sintoma</th><th lang="en">symptom</th><th lang="pt-BR">o que fazer</th><th lang="en">what to do</th></tr></thead>
+          <tbody>
+            <tr><td style="white-space:normal">claude: command not found</td><td><span lang="pt-BR">Feche e abra o terminal. Se continuar: <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.bashrc</code> e <code>source ~/.bashrc</code> (no Mac, <code>~/.zshrc</code>).</span><span lang="en">Close and reopen the terminal. If it persists: <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.bashrc</code> and <code>source ~/.bashrc</code> (on a Mac, <code>~/.zshrc</code>).</span></td></tr>
+            <tr><td style="white-space:normal">Permission denied (./instalar.sh, ./ae)</td><td><code>chmod +x instalar.sh ae</code></td></tr>
+            <tr><td style="white-space:normal"><span lang="pt-BR">macOS: precisa do bash 4</span><span lang="en">macOS: needs bash 4</span></td><td><span lang="pt-BR"><code>brew install bash</code>, feche e abra o Terminal; <code>bash --version</code> deve mostrar 5.</span><span lang="en"><code>brew install bash</code>, close and reopen Terminal; <code>bash --version</code> should show 5.</span></td></tr>
+            <tr><td style="white-space:normal">ENETUNREACH / Headless Shell</td><td><span lang="pt-BR">Comum no WSL, que não tem IPv6: </span><span lang="en">Common on WSL, which has no IPv6: </span><code>cd remotion && NODE_OPTIONS=--dns-result-order=ipv4first npx remotion browser ensure && cd ..</code></td></tr>
+            <tr><td style="white-space:normal">error while loading shared libraries</td><td><span lang="pt-BR">Faltam bibliotecas do navegador. Rode de novo os comandos de bibliotecas do passo 1 (Linux/WSL).</span><span lang="en">Browser libraries are missing. Re-run the library commands from step 1 (Linux/WSL).</span></td></tr>
+            <tr><td style="white-space:normal">claude -p não respondeu</td><td><span lang="pt-BR">O Claude não está logado. Rode <code>claude</code>, entre e saia com <code>/exit</code>. Teste com <code>claude -p "Responda só: OK"</code>.</span><span lang="en">Claude isn't logged in. Run <code>claude</code>, sign in and leave with <code>/exit</code>. Test with <code>claude -p "Responda só: OK"</code>.</span></td></tr>
+            <tr><td style="white-space:normal">HTTP Error 429</td><td><span lang="pt-BR">O YouTube bloqueou por um tempo. Espere alguns minutos, ou baixe de outro jeito e use <code>./ae auto arquivo.mp4</code>.</span><span lang="en">YouTube blocked you temporarily. Wait a few minutes, or download another way and use <code>./ae auto file.mp4</code>.</span></td></tr>
+            <tr><td style="white-space:normal"><span lang="pt-BR">Vídeo veio só com áudio</span><span lang="en">Video came audio-only</span></td><td><span lang="pt-BR">Use sempre <code>./ae auto</code> ou <code>./ae baixar</code>. Se persistir: <code>uv tool upgrade yt-dlp</code>.</span><span lang="en">Always use <code>./ae auto</code> or <code>./ae baixar</code>. If it persists: <code>uv tool upgrade yt-dlp</code>.</span></td></tr>
+            <tr><td style="white-space:normal"><span lang="pt-BR">Transcrição muito lenta</span><span lang="en">Transcription very slow</span></td><td><span lang="pt-BR"><code>./ae verificar</code> mostra se achou a GPU. Sem NVIDIA (ou no Mac), use <code>--trecho</code>.</span><span lang="en"><code>./ae verificar</code> shows whether it found the GPU. Without NVIDIA (or on a Mac), use <code>--trecho</code>.</span></td></tr>
+            <tr><td style="white-space:normal"><span lang="pt-BR">Rosto cortado / nome errado</span><span lang="en">Face cropped / wrong name</span></td><td><span lang="pt-BR">Peça: <code>./ae revisar --pedido "no c02 o rosto está cortado perto dos 15 segundos"</code> e depois <code>./ae produzir</code>.</span><span lang="en">Ask: <code>./ae revisar --pedido "in c02 the face is cropped around 15 seconds"</code> then <code>./ae produzir</code>.</span></td></tr>
+            <tr><td style="white-space:normal">Permission denied / EACCES (WSL)</td><td><span lang="pt-BR">Arquivos editados pelo Explorer do Windows ficam com outro dono: <code>sudo chown -R $(whoami): ~/claude-ai-shorts-editor</code>.</span><span lang="en">Files edited from Windows Explorer end up with another owner: <code>sudo chown -R $(whoami): ~/claude-ai-shorts-editor</code>.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:16px" lang="pt-BR">Não achou? Abra uma <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor/issues">issue no GitHub</a> com a saída do <code>./ae verificar</code>, o erro e, se for do Claude, o arquivo mais recente de <code>edit/logs/</code>.</p>
+      <p class="muted" style="margin-top:16px" lang="en">Not listed? Open a <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor/issues">GitHub issue</a> with the output of <code>./ae verificar</code>, the error and, if it's a Claude error, the latest file in <code>edit/logs/</code>.</p>
+    </div>
+
+    <div class="split" style="margin-top:56px">
+      <div>
+        <h3 lang="pt-BR">Atualizar</h3><h3 lang="en">Update</h3>
+<pre class="code" style="margin-top:12px"><code>cd ~/claude-ai-shorts-editor
+git pull
+./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+      </div>
+      <div>
+        <h3 lang="pt-BR">Desinstalar</h3><h3 lang="en">Uninstall</h3>
+<pre class="code" style="margin-top:12px"><code>rm -rf ~/claude-ai-shorts-editor ~/.claude/skills/corte-viral ~/.claude/skills/video-use</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
+        <p class="muted" style="margin-top:8px;font-size:.92rem" lang="pt-BR">Isso apaga também os vídeos e reels dentro das pastas do projeto. Copie antes o que quiser guardar.</p>
+        <p class="muted" style="margin-top:8px;font-size:.92rem" lang="en">This also deletes the videos and reels inside the project folders. Copy anything you want to keep first.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:40px" lang="pt-BR">Este passo a passo resume os <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor/tree/main/docs">guias do repositório</a>, que têm todos os detalhes.</p>
+    <p class="muted" style="margin-top:40px" lang="en">This walkthrough summarizes the <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor/tree/main/docs">repository guides</a> (in Portuguese), which have every detail.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <p><b style="color:var(--ink)">Claude AI Shorts Editor</b> · <span lang="pt-BR">feito com Claude Code, Whisper, video-use e Remotion.</span><span lang="en">built with Claude Code, Whisper, video-use and Remotion.</span></p>
+      <p lang="pt-BR">Use só vídeos que você tem direito de usar. O Remotion é grátis para pessoas físicas e empresas pequenas; empresas maiores precisam de licença em remotion.pro.</p>
+      <p lang="en">Only use videos you have the rights to. Remotion is free for individuals and small companies; larger companies need a license from remotion.pro.</p>
+      <p lang="pt-BR">Projeto independente e de código aberto. Não é um produto da Anthropic.</p>
+      <p lang="en">Independent, open-source project. Not an Anthropic product.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <a href="./"><span lang="pt-BR">Produto</span><span lang="en">Product</span></a>
+      <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+      <a data-repo-href href="https://github.com/pedro-oscar/claude-ai-shorts-editor">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>

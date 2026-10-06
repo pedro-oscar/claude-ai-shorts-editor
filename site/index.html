@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR" data-lang="pt" data-repo="pedro-oscar/claude-ai-shorts-editor"
+      data-title-pt="Claude AI Shorts Editor — do vídeo longo ao corte viral"
+      data-title-en="Claude AI Shorts Editor — from long video to viral cut">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude AI Shorts Editor — do vídeo longo ao corte viral</title>
+<meta name="description" content="Cole o link de um podcast, live ou aula. O Claude AI Shorts Editor transcreve na sua GPU, o Claude escolhe os melhores trechos e escreve o roteiro, e o Remotion entrega reels 9:16 com rosto enquadrado, legenda palavra a palavra e motion graphics.">
+<meta property="og:title" content="Claude AI Shorts Editor — do vídeo longo ao corte viral">
+<meta property="og:description" content="Vídeo longo → reels 9:16 com rosto enquadrado, legenda animada e motion graphics. Um comando.">
+<meta property="og:image" content="assets/img/cena-marionete.webp">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>
+(function(){var r=document.documentElement,g=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
+var t=g('theme');if(t)r.dataset.theme=t;r.dataset.themeEffective=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+var q=new URLSearchParams(location.search).get('lang');var l=(q==='en'||q==='pt')?q:(g('lang')||'pt');r.dataset.lang=l;if(l==='en')r.lang='en';})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:wght@400;700&family=Atkinson+Hyperlegible+Next:wght@400;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main"><span lang="pt-BR">Pular para o conteúdo</span><span lang="en">Skip to content</span></a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="rec" aria-hidden="true"></span><span class="bn-a">Claude AI</span>Shorts Editor</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="./" aria-current="page"><span lang="pt-BR">Produto</span><span lang="en">Product</span></a>
+      <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+      <a href="instalar.html"><span lang="pt-BR">Instalar</span><span lang="en">Install</span></a>
+    </nav>
+    <div class="tools">
+      <a class="btn-icon" data-repo-href href="#" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+      <button class="lang" type="button" data-lang-toggle data-pt-label="Mudar para inglês" data-en-label="Switch to Portuguese"><span data-l="pt">PT</span>&nbsp;/&nbsp;<span data-l="en">EN</span></button>
+      <button class="btn-icon" type="button" data-theme-toggle data-pt-label="Alternar tema claro/escuro" data-en-label="Toggle light/dark theme">
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <button class="btn-icon menu-btn" type="button" aria-expanded="false" aria-controls="mnav" data-pt-label="Abrir menu" data-en-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="wrap mobile-nav" id="mnav" aria-label="Menu">
+    <a href="./"><span lang="pt-BR">Produto</span><span lang="en">Product</span></a>
+    <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+    <a href="instalar.html"><span lang="pt-BR">Instalar</span><span lang="en">Install</span></a>
+    <a href="https://github.com/pedro-oscar/claude-ai-shorts-editor">GitHub</a>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ============================== HERO ============================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1 lang="pt-BR">Do vídeo longo ao corte <span class="cap">viral</span>.</h1>
+        <h1 lang="en">From long video to <span class="cap">viral</span> cut.</h1>
+      </div>
+      <div>
+        <p class="lede" lang="pt-BR">Cole o link de um podcast, live ou aula. O <b>Claude AI Shorts Editor</b> transcreve no seu computador, o Claude escolhe os melhores trechos e escreve o roteiro, e o Remotion entrega reels 9:16 com o rosto enquadrado, legenda palavra a palavra e motion graphics.</p>
+        <p class="lede" lang="en">Paste a link to a podcast, livestream or lecture. <b>Claude AI Shorts Editor</b> transcribes it on your computer, Claude picks the best moments and writes the script, and Remotion renders 9:16 reels with the face framed, word-by-word captions and motion graphics.</p>
+        <div class="hero-cta">
+          <div class="cmd"><code><span class="p">$ </span>./ae auto "https://youtu.be/…"</code><button class="copy" type="button" data-copy='./ae auto "https://www.youtube.com/watch?v=XXXX"'><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+          <div class="btns">
+            <a class="btn primary" href="instalar.html"><span lang="pt-BR">Instalar</span><span lang="en">Install</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn ghost" href="como-funciona.html"><span lang="pt-BR">Ver como funciona</span><span lang="en">See how it works</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ilha de edição: fonte 16:9 + linha do tempo → reel 9:16 -->
+    <div class="bay" id="bay">
+      <div class="bay-src">
+        <div class="bay-label">
+          <span><b>bruto/podcast-ep42.mp4</b> · 16:9 · 2:14:08</span>
+          <span lang="pt-BR">c01 · nota 8,4</span><span lang="en">c01 · score 8.4</span>
+        </div>
+        <div class="monitor16" aria-hidden="true">
+          <svg class="spk b" viewBox="0 0 300 380"><use href="#host"/></svg>
+          <svg class="spk" id="mon-spk" viewBox="0 0 300 380" style="left:40%"><use href="#spk"/></svg>
+          <div class="facebox" id="facebox" style="left:33%;top:39%;width:14%;height:34%"></div>
+          <div class="cropwin" id="cropwin" style="left:40%"></div>
+          <span class="tc" id="mon-tc">1:08:12.3</span>
+        </div>
+
+        <div class="timeline" aria-hidden="true">
+          <div class="track all">
+            <svg class="wave" id="wave-all" viewBox="0 0 1000 54" preserveAspectRatio="none"></svg>
+            <div class="seg" style="left:9.4%;width:.8%"><i>c02</i></div>
+            <div class="seg" style="left:23.2%;width:.7%"><i>c03</i></div>
+            <div class="seg on" style="left:50.8%;width:.6%"><i>c01</i></div>
+            <div class="seg" style="left:61.5%;width:.9%"><i>c04</i></div>
+            <div class="seg" style="left:79.9%;width:.7%"><i>c05</i></div>
+            <div class="seg" style="left:92.2%;width:.8%"><i>c06</i></div>
+          </div>
+          <div class="ruler" style="padding-top:5px"><span>0:00</span><span>0:45</span><span>1:30</span><span>2:14</span></div>
+        </div>
+
+        <div class="timeline" aria-hidden="true">
+          <div class="ruler"><span>1:08:08</span><span lang="pt-BR">c01 ampliado</span><span lang="en">c01 zoomed in</span><span>1:08:52</span></div>
+          <div class="track">
+            <svg class="wave" id="wave-zoom" viewBox="0 0 1000 54" preserveAspectRatio="none"></svg>
+            <div class="seg" id="segA"><i lang="pt-BR">trecho 1</i><i lang="en">take 1</i></div>
+            <div class="cut" id="cutX"><i lang="pt-BR">digressão · fora</i><i lang="en">tangent · cut</i></div>
+            <div class="seg" id="segB"><i lang="pt-BR">trecho 2</i><i lang="en">take 2</i></div>
+            <div class="playhead" id="ph"></div>
+          </div>
+        </div>
+        <div class="bay-meta">
+          <span><span lang="pt-BR">fonte</span><span lang="en">source</span> <b id="tc-src">1:08:12.3</b></span>
+          <span>→ reel <b id="tc-reel">0:00.0</b></span>
+          <span><span class="dot">●</span> <span lang="pt-BR">gancho → desenvolvimento → payoff</span><span lang="en">hook → build-up → payoff</span></span>
+        </div>
+      </div>
+
+      <div class="bay-out">
+        <div class="bay-label" style="width:100%;max-width:300px"><span><b>publicar/ep42-c01.mp4</b></span><span>1080×1920</span></div>
+        <div class="reel" id="reel" role="img" data-pt-label="Animação de um reel: legenda palavra a palavra, título, comparação, contador e zoom no final" data-en-label="Animated reel: word-by-word captions, title, comparison card, counter and a zoom at the end">
+          <div class="stage"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg></div>
+          <div class="grain"></div>
+          <div class="ui">
+            <div class="r-title"></div>
+            <div class="r-key"></div>
+            <div class="r-card"></div>
+            <div class="r-count"><span></span></div>
+            <div class="r-cap"></div>
+          </div>
+          <div class="r-flash"></div>
+          <div class="r-fade"></div>
+        </div>
+      </div>
+    </div>
+    <p class="hero-note" style="margin-top:12px" lang="pt-BR">Exemplo ilustrativo, animado no navegador com as mesmas regras do reel de verdade: títulos e cards nunca ficam sobre o rosto, a legenda acende a palavra falada e o fim escurece suave.</p>
+    <p class="hero-note" style="margin-top:12px" lang="en">Illustrative example, animated in the browser with the same rules as a real reel: titles and cards never sit on the face, the caption lights up the spoken word and the ending fades out gently.</p>
+  </div>
+</section>
+
+<!-- ============================== O QUE SAI ============================== -->
+<section class="sec">
+  <div class="wrap split">
+    <div class="sec-head" style="margin:0">
+      <h2 lang="pt-BR">Um comando. Seis reels e o porquê de cada um.</h2>
+      <h2 lang="en">One command. Six reels, and why each one.</h2>
+      <p class="lede" lang="pt-BR">Você não recebe só os vídeos. Recebe o roteiro que o Claude escreveu, com o gancho, o payoff e a nota de cada corte, e as folhas que ele usou para revisar o próprio trabalho.</p>
+      <p class="lede" lang="en">You don't just get videos. You get the script Claude wrote, with each cut's hook, payoff and score, plus the contact sheets it used to review its own work.</p>
+      <p lang="pt-BR">Por padrão saem 6 cortes de 35 a 60 segundos. Dá para pedir mais, menos, só um trecho do vídeo ou uma prévia rápida em meia resolução.</p>
+      <p lang="en">By default you get 6 cuts of 35 to 60 seconds. You can ask for more, fewer, just one part of the video, or a quick half-resolution preview.</p>
+    </div>
+    <div class="tree" role="list" aria-label="Arquivos gerados">
+      <div class="row" role="listitem"><span class="d">publicar/</span></div>
+      <div class="row" role="listitem"><span>&nbsp;&nbsp;ep42-c01.mp4 … c06.mp4</span><span class="n" lang="pt-BR">os reels, prontos para postar</span><span class="n" lang="en">the reels, ready to post</span></div>
+      <div class="row" role="listitem"><span class="d">edit/roteiros/</span></div>
+      <div class="row" role="listitem"><span>&nbsp;&nbsp;ep42.json</span><span class="n" lang="pt-BR">o roteiro: trechos, títulos, motions</span><span class="n" lang="en">the script: takes, titles, motions</span></div>
+      <div class="row" role="listitem"><span>&nbsp;&nbsp;ep42.md</span><span class="n" lang="pt-BR">resumo legível, com o porquê de cada corte</span><span class="n" lang="en">readable summary, with why each cut</span></div>
+      <div class="row" role="listitem"><span class="d">edit/cortes/ep42-c01/</span></div>
+      <div class="row" role="listitem"><span>&nbsp;&nbsp;revisao.png</span><span class="n" lang="pt-BR">até 12 quadros que o Claude conferiu</span><span class="n" lang="en">up to 12 frames Claude checked</span></div>
+      <div class="row" role="listitem"><span class="d">edit/logs/</span></div>
+      <div class="row" role="listitem"><span>&nbsp;&nbsp;…-roteirizar.jsonl</span><span class="n" lang="pt-BR">tudo o que o Claude fez, passo a passo</span><span class="n" lang="en">everything Claude did, step by step</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== QUEM FAZ O QUÊ ============================== -->
+<section class="sec band">
+  <div class="wrap split wide-left">
+    <div>
+      <div class="sec-head">
+        <h2 lang="pt-BR">Você não escolhe nada.</h2>
+        <h2 lang="en">You don't pick anything.</h2>
+        <p class="lede" lang="pt-BR">O trabalho mecânico é de scripts. O que precisa de critério (o que corta, onde começa, o que aparece na tela) é do Claude, e ele deixa escrito por quê.</p>
+        <p class="lede" lang="en">Mechanical work is done by scripts. Anything that needs judgment (what to cut, where it starts, what shows on screen) is Claude's, and it writes down why.</p>
+      </div>
+      <div class="tablewrap">
+      <table class="who">
+        <thead><tr><th>#</th><th lang="pt-BR">Etapa</th><th lang="en">Step</th><th lang="pt-BR">Quem faz</th><th lang="en">Who</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><span lang="pt-BR">Baixar o vídeo (ou usar o arquivo)</span><span lang="en">Download the video (or use the file)</span></td><td class="by"><span class="tag">yt-dlp</span></td></tr>
+          <tr><td>2</td><td><span lang="pt-BR">Transcrever, palavra por palavra</span><span lang="en">Transcribe, word by word</span></td><td class="by"><span class="tag">Whisper · GPU</span></td></tr>
+          <tr><td>3</td><td><span lang="pt-BR">Escolher os trechos e escrever o roteiro: cortes, título, legenda, correções, ênfases, motions, cenas novas</span><span lang="en">Pick the moments and write the script: cuts, title, captions, fixes, emphasis, motions, new scenes</span></td><td class="by"><span class="tag claude">Claude</span></td></tr>
+          <tr><td>4</td><td><span lang="pt-BR">Validar o roteiro</span><span lang="en">Validate the script</span></td><td class="by"><span class="tag">script</span> + <span class="tag claude">Claude</span></td></tr>
+          <tr><td>5</td><td><span lang="pt-BR">Cortar, enquadrar o rosto, legendar, animar e renderizar</span><span lang="en">Cut, frame the face, caption, animate and render</span></td><td class="by"><span class="tag">video-use</span> + <span class="tag">Remotion</span></td></tr>
+          <tr><td>6</td><td><span lang="pt-BR">Olhar as folhas de revisão e corrigir o roteiro</span><span lang="en">Look at the review sheets and fix the script</span></td><td class="by"><span class="tag claude">Claude</span></td></tr>
+          <tr><td>—</td><td><span lang="pt-BR">Escolher o vídeo e rodar o comando</span><span lang="en">Choose the video and run the command</span></td><td class="by"><span class="tag you" lang="pt-BR">você</span><span class="tag you" lang="en">you</span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <figure class="scene" style="max-width:340px;justify-self:center">
+      <img src="assets/img/cena-etapas-full.webp" width="540" height="960" loading="lazy" alt="Cena ilustrada gerada pelo Claude AI Shorts Editor: gancho, desenvolvimento e payoff" style="aspect-ratio:9/16">
+      <figcaption lang="pt-BR"><b>Etapas</b> · cena em tela cheia que o próprio sistema desenhou para explicar a regra que ele usa para escolher cortes.</figcaption>
+      <figcaption lang="en"><b>Etapas</b> · a full-screen scene the system drew itself to explain the rule it uses to pick cuts.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== MOTIONS ============================== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 lang="pt-BR">Sete motions, no tempo da palavra.</h2>
+      <h2 lang="en">Seven motions, timed to the word.</h2>
+      <p class="lede" lang="pt-BR">O Claude ancora cada efeito numa palavra da fala. O layout mede onde está a cabeça e encaixa o texto no espaço livre. Toque num quadro para repetir.</p>
+      <p class="lede" lang="en">Claude anchors each effect to a spoken word. The layout measures where the head is and fits the text into the free space. Tap a tile to replay it.</p>
+    </div>
+    <div class="motions">
+      <div class="mtile">
+        <button class="mini" type="button" aria-label="title"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-title" lang="pt-BR">A série que uniu a família</span><span class="m-title" lang="en">The show that united us</span><span class="m-cap" lang="pt-BR">MINHA <b>FAMÍLIA</b></span><span class="m-cap" lang="en">MY <b>FAMILY</b></span></button>
+        <h3>title</h3>
+        <p lang="pt-BR">Manchete do gancho nos 3 primeiros segundos.</p><p lang="en">The hook's headline in the first 3 seconds.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini" type="button" aria-label="keyword"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-key" lang="pt-BR">Maratona</span><span class="m-key" lang="en">Binge</span><span class="m-cap" lang="pt-BR">TEM <b>SÉRIE</b> PASSANDO</span><span class="m-cap" lang="en">A <b>SHOW</b> IS ON</span></button>
+        <h3>keyword</h3>
+        <p lang="pt-BR">Uma ideia em 1–2 palavras, sem repetir a legenda.</p><p lang="en">One idea in 1–2 words, never repeating the caption.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini" type="button" aria-label="counter"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-count" data-count="96"><span>96</span><small lang="pt-BR">episódios</small><small lang="en">episodes</small></span><span class="m-cap" lang="pt-BR"><b>NOVENTA E SEIS</b></span><span class="m-cap" lang="en"><b>NINETY-SIX</b></span></button>
+        <h3>counter</h3>
+        <p lang="pt-BR">Todo número que importa vira contador.</p><p lang="en">Every number that matters becomes a counter.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini z" type="button" aria-label="zoom"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-cap" lang="pt-BR">O ASSUNTO ERA <b>A GENTE</b></span><span class="m-cap" lang="en">THE TOPIC WAS <b>US</b></span></button>
+        <h3>zoom</h3>
+        <p lang="pt-BR">Punchline e frase de efeito, rosto centrado.</p><p lang="en">Punchlines and one-liners, face centred.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini s" type="button" aria-label="shake"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-cap" lang="pt-BR">ELE <b>MORREU</b>?!</span><span class="m-cap" lang="en">HE <b>DIED</b>?!</span></button>
+        <h3>shake</h3>
+        <p lang="pt-BR">Susto e indignação. No máximo dois por corte.</p><p lang="en">Shock and outrage. Two per cut, tops.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini" type="button" aria-label="flash"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-flash"></span><span class="m-cap" lang="pt-BR">SÓ QUE <b>NÃO</b></span><span class="m-cap" lang="en">EXCEPT <b>NO</b></span></button>
+        <h3>flash</h3>
+        <p lang="pt-BR">Virada de assunto, antes de uma revelação.</p><p lang="en">A turn in the story, right before a reveal.</p>
+      </div>
+      <div class="mtile">
+        <button class="mini" type="button" aria-label="scene"><svg class="spk" viewBox="0 0 300 380"><use href="#spk"/></svg><span class="m-card"><i>A</i><i>B</i></span><span class="m-cap"><b>COMPARA</b> OS DOIS</span></button>
+        <h3>scene</h3>
+        <p lang="pt-BR">Ilustração em card ou tela cheia, o áudio continua.</p><p lang="en">An illustration as a card or full screen; audio keeps going.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CENAS ============================== -->
+<section class="sec band">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 lang="pt-BR">Quando falta ilustração, o Claude desenha.</h2>
+      <h2 lang="en">When there's no illustration, Claude draws one.</h2>
+      <p class="lede" lang="pt-BR">Cenas são componentes React desenhados em SVG, no código, para o assunto do vídeo. Ficam no projeto e são reaproveitadas nos próximos. Estes quadros saíram de reels reais.</p>
+      <p class="lede" lang="en">Scenes are React components drawn in SVG, in code, for the topic of the video. They stay in the project and get reused next time. These frames come from real reels.</p>
+    </div>
+    <div class="scenes">
+      <figure class="scene"><img src="assets/img/cena-marionete.webp" width="640" height="520" loading="lazy" alt="Cena: marionete controlada por fios, título UM COMANDO"><figcaption><b>Marionete</b> · card</figcaption></figure>
+      <figure class="scene"><img src="assets/img/cena-carteira.webp" width="640" height="520" loading="lazy" alt="Cena: carro com cadeado, título TRANCADA"><figcaption><b>Carteira</b> · card</figcaption></figure>
+      <figure class="scene"><img src="assets/img/cena-assets.webp" width="640" height="520" loading="lazy" alt="Cena: computador com barra de vídeo, CLAUDE ANIMA"><figcaption><b>Assets</b> · card</figcaption></figure>
+      <figure class="scene"><img src="assets/img/cena-venda.webp" width="640" height="520" loading="lazy" alt="Cena: pessoa com venda nos olhos, VENDA ESCURA"><figcaption><b>Venda</b> · card</figcaption></figure>
+      <figure class="scene"><img src="assets/img/cena-orelha.webp" width="640" height="520" loading="lazy" alt="Cena: rosto de perfil com algo pingando no ouvido"><figcaption><b>Orelha</b> · card</figcaption></figure>
+      <figure class="scene" style="display:grid;place-items:center;padding:20px;min-height:100%">
+        <pre class="code" style="background:transparent;padding:0;font-size:.78rem"><span class="c-com">// remotion/src/scenes/</span>
+<span class="c-key">Marionete</span>.tsx
+<span class="c-key">Carteira</span>.tsx
+<span class="c-key">Comparacao</span>.tsx
+<span class="c-key">Venda</span>.tsx
+<span class="c-key">Grafico</span>.tsx
+<span class="c-dim">… +12</span></pre>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PEDIDO ============================== -->
+<section class="sec">
+  <div class="wrap split">
+    <div class="sec-head" style="margin:0">
+      <h2 lang="pt-BR">Não gostou? Peça em português.</h2>
+      <h2 lang="en">Don't like it? Just say so.</h2>
+      <p class="lede" lang="pt-BR">O Claude relê o roteiro, muda o que você pediu e só o que mudou é renderizado de novo. Mexer só em legenda ou motion nem recorta o vídeo.</p>
+      <p class="lede" lang="en">Claude rereads the script, changes what you asked for, and only what changed is rendered again. Touching only captions or motions doesn't even re-cut the video.</p>
+      <div class="cmd" style="margin-top:8px"><code lang="pt-BR"><span class="p">$ </span>./ae revisar --pedido "o c02 começa devagar"</code><code lang="en"><span class="p">$ </span>./ae revisar --pedido "c02 starts too slow"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+    </div>
+    <div>
+      <div class="bay-label" style="color:var(--muted)"><span>edit/roteiros/ep42.json · c02</span></div>
+      <div class="diff" aria-label="diff">
+        <div class="c-dim">  "id": "c02",</div>
+        <div class="del">- "trechos": [["12:40.2", "13:31.0"]],</div>
+        <div class="add">+ "trechos": [["12:51.8", "13:31.0"]],</div>
+        <div class="del">- "titulo": "Sobre finais de série",</div>
+        <div class="add">+ "titulo": "Final bom decepciona",</div>
+        <div class="c-dim">  "motions": [</div>
+        <div class="add">+   {"type": "flash", "at": "12:51.8"},</div>
+        <div class="c-dim">    {"type": "keyword", "word": "final", …}</div>
+        <div class="c-dim">  ]</div>
+      </div>
+      <p class="muted" style="font-size:.9rem;margin-top:10px" lang="pt-BR">O gancho passou para a frase mais forte e os 11 s de introdução saíram. Exemplo ilustrativo.</p>
+      <p class="muted" style="font-size:.9rem;margin-top:10px" lang="en">The hook moved to the strongest line and the 11 s intro is gone. Illustrative example.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== REQUISITOS ============================== -->
+<section class="sec band">
+  <div class="wrap split">
+    <div class="sec-head" style="margin:0">
+      <h2 lang="pt-BR">Roda no seu computador.</h2>
+      <h2 lang="en">Runs on your machine.</h2>
+      <p class="lede" lang="pt-BR">O vídeo fica no seu computador: a transcrição e o render são locais. Para o Claude vão só o texto da transcrição e as folhas de revisão.</p>
+      <p class="lede" lang="en">The video stays on your computer: transcription and rendering are local. Only the transcript text and the review sheets go to Claude.</p>
+      <div class="btns"><a class="btn primary" href="instalar.html"><span lang="pt-BR">Ver instalação</span><span lang="en">See installation</span></a></div>
+    </div>
+    <dl class="facts">
+      <div><dt lang="pt-BR">sistema</dt><dt lang="en">system</dt><dd lang="pt-BR">Windows 10/11 (pelo WSL), macOS 13+ ou Linux</dd><dd lang="en">Windows 10/11 (via WSL), macOS 13+ or Linux</dd></div>
+      <div><dt>GPU</dt><dd lang="pt-BR">NVIDIA recomendada: a transcrição fica muitas vezes mais rápida. Sem ela (e no Mac) roda no processador, mais devagar</dd><dd lang="en">NVIDIA recommended: transcription gets many times faster. Without one (and on a Mac) it runs on the CPU, slower</dd></div>
+      <div><dt>Claude</dt><dd lang="pt-BR">Claude Pro, Max, Team ou Enterprise, ou uma chave de API. O plano gratuito não inclui o Claude Code</dd><dd lang="en">Claude Pro, Max, Team or Enterprise, or an API key. The free plan doesn't include Claude Code</dd></div>
+      <div><dt lang="pt-BR">ferramentas</dt><dt lang="en">tools</dt><dd lang="pt-BR">git · ffmpeg · Python 3.10+ · Node 18+. O <code>instalar.sh</code> cuida do resto</dd><dd lang="en">git · ffmpeg · Python 3.10+ · Node 18+. <code>instalar.sh</code> handles the rest</dd></div>
+      <div><dt lang="pt-BR">disco</dt><dt lang="en">disk</dt><dd lang="pt-BR">Uns 20 GB livres</dd><dd lang="en">About 20 GB free</dd></div>
+      <div><dt lang="pt-BR">saída</dt><dt lang="en">output</dt><dd lang="pt-BR">MP4 1080×1920, 30 fps, com legenda gravada</dd><dd lang="en">MP4 1080×1920, 30 fps, captions burned in</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="end">
+  <div class="wrap">
+    <h2 lang="pt-BR">Escolha o vídeo. O resto é com o Claude.</h2>
+    <h2 lang="en">Pick the video. Claude does the rest.</h2>
+    <p class="lede" lang="pt-BR">Três comandos para quem já usa terminal, e um passo a passo para Windows, Mac e Linux para quem nunca abriu um.</p>
+    <p class="lede" lang="en">Three commands if you already use a terminal, and a walkthrough for Windows, Mac and Linux if you've never opened one.</p>
+    <div class="btns">
+      <a class="btn primary" href="instalar.html#rapida"><span lang="pt-BR">Instalação rápida</span><span lang="en">Quick install</span></a>
+      <a class="btn ghost" href="instalar.html#passo-a-passo"><span lang="pt-BR">Passo a passo</span><span lang="en">Step by step</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <p><b style="color:var(--ink)">Claude AI Shorts Editor</b> · <span lang="pt-BR">feito com Claude Code, Whisper, video-use e Remotion.</span><span lang="en">built with Claude Code, Whisper, video-use and Remotion.</span></p>
+      <p lang="pt-BR">Use só vídeos que você tem direito de usar. O Remotion é grátis para pessoas físicas e empresas pequenas; empresas maiores precisam de licença em remotion.pro.</p>
+      <p lang="en">Only use videos you have the rights to. Remotion is free for individuals and small companies; larger companies need a license from remotion.pro.</p>
+    <p lang="pt-BR">Projeto independente e de código aberto. Não é um produto da Anthropic.</p>
+      <p lang="en">Independent, open-source project. Not an Anthropic product.</p>
+    </div>
+    <nav aria-label="Rodapé">
+      <a href="como-funciona.html"><span lang="pt-BR">Como funciona</span><span lang="en">How it works</span></a>
+      <a href="instalar.html"><span lang="pt-BR">Instalar</span><span lang="en">Install</span></a>
+      <a data-repo-href href="#">GitHub</a>
+    </nav>
+  </div>
+</footer>
+<script src="assets/site.js"></script>
+</body>
+</html>
