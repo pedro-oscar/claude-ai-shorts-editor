@@ -18,7 +18,15 @@ Isso cria a pasta `claude-ai-shorts-editor` na sua pasta pessoal e entra nela.
 > cd ~/claude-ai-shorts-editor
 > ```
 
-## Passo 2: rode o instalador
+## Passo 2: dê permissão de execução aos scripts
+
+```bash
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
+```
+
+Isso deixa rodar o instalador e o `./ae`, o atalho que você vai usar para tudo (ele aponta para `skill/corte-viral/scripts/ae`). Não aparece nenhuma mensagem: é normal. Se algum dia aparecer `Permission denied` ao rodar `./ae` ou `./instalar.sh`, rode este comando de novo.
+
+## Passo 3: rode o instalador
 
 ```bash
 ./instalar.sh
@@ -51,7 +59,7 @@ Se aparecer algum **✗**, a própria linha diz como resolver. Veja também [Pro
 
 > Na **primeira transcrição** o programa baixa o modelo do Whisper (cerca de 3 GB). Isso acontece uma vez só.
 
-## Passo 3: teste com o vídeo de demonstração
+## Passo 4: teste com o vídeo de demonstração
 
 ```bash
 ./ae demo

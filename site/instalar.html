@@ -116,10 +116,11 @@ claude</code><button class="copy" type="button"><span lang="pt-BR">copiar</span>
         </li>
         <li>
           <h3 lang="pt-BR">Clone e instale</h3><h3 lang="en">Clone and install</h3>
-          <p lang="pt-BR">O instalador liga a skill <code>corte-viral</code>, baixa o video-use, o Whisper, o yt-dlp e o Remotion, e termina rodando a verificação. Leva de 5 a 15 minutos.</p>
-          <p lang="en">The installer links the <code>corte-viral</code> skill, downloads video-use, Whisper, yt-dlp and Remotion, and finishes by running the check. Takes 5 to 15 minutes.</p>
+          <p lang="pt-BR">O <code>chmod +x</code> dá permissão de execução ao instalador e ao atalho <code>./ae</code>. O instalador liga a skill <code>corte-viral</code>, baixa o video-use, o Whisper, o yt-dlp e o Remotion, e termina rodando a verificação. Leva de 5 a 15 minutos.</p>
+          <p lang="en"><code>chmod +x</code> makes the installer and the <code>./ae</code> shortcut executable. The installer links the <code>corte-viral</code> skill, downloads video-use, Whisper, yt-dlp and Remotion, and finishes by running the check. Takes 5 to 15 minutes.</p>
 <pre class="code"><code>git clone https://github.com/pedro-oscar/claude-ai-shorts-editor.git
 cd claude-ai-shorts-editor
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
 ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
         </li>
         <li>
@@ -147,7 +148,7 @@ cd claude-ai-shorts-editor
           <div>
             <p lang="pt-BR">Para atualizar, rode de novo o instalador: ele pode ser rodado quantas vezes quiser.</p>
             <p lang="en">To update, run the installer again: it's safe to run as many times as you like.</p>
-            <div class="cmd" style="margin-top:8px"><code><span class="p">$ </span>git pull && ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
+            <div class="cmd" style="margin-top:8px"><code><span class="p">$ </span>git pull && chmod +x instalar.sh ae skill/corte-viral/scripts/ae && ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div>
           </div>
         </div>
         <p class="muted" style="font-size:.92rem" lang="pt-BR">Travou em algo? O <a href="#passo-a-passo" data-goto-tab="passo-a-passo">passo a passo</a> explica cada comando e tem uma tabela de problemas comuns.</p>
@@ -340,12 +341,23 @@ sudo apt install -y nodejs</code><button class="copy" type="button"><span lang="
         <div class="body">
           <span class="time" lang="pt-BR">~ 5–15 min, depende da internet</span><span class="time" lang="en">~ 5–15 min, depends on your connection</span>
           <h3 lang="pt-BR">Baixe o projeto e rode o instalador</h3><h3 lang="en">Get the project and run the installer</h3>
+<ol lang="pt-BR">
+            <li><b>Baixe o projeto</b> para a sua pasta pessoal e entre nela.</li>
+            <li><b>Dê permissão de execução</b> ao instalador e ao <code>./ae</code>, o atalho que você vai usar para tudo (ele aponta para <code>skill/corte-viral/scripts/ae</code>). Não aparece nenhuma mensagem: é normal.</li>
+            <li><b>Rode o instalador.</b></li>
+          </ol>
+          <ol lang="en">
+            <li><b>Download the project</b> into your home folder and enter it.</li>
+            <li><b>Make the installer and <code>./ae</code> executable</b>; <code>./ae</code> is the shortcut you'll use for everything (it points to <code>skill/corte-viral/scripts/ae</code>). No message appears: that's normal.</li>
+            <li><b>Run the installer.</b></li>
+          </ol>
 <pre class="code"><code>cd ~
 git clone https://github.com/pedro-oscar/claude-ai-shorts-editor.git
 cd claude-ai-shorts-editor
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
 ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
-          <p lang="pt-BR">O instalador faz sozinho, em 7 etapas:</p>
-          <p lang="en">The installer does this on its own, in 7 steps:</p>
+          <p lang="pt-BR">Depois disso, o instalador faz sozinho, em 7 etapas:</p>
+          <p lang="en">From there, the installer does this on its own, in 7 steps:</p>
           <ol lang="pt-BR">
             <li>confere se os programas do passo 1 estão instalados (e diz o que falta);</li>
             <li>liga a skill <b>corte-viral</b>, as instruções do Claude, em <code>~/.claude/skills/</code>;</li>
@@ -432,8 +444,8 @@ Próximo passo: ./ae demo</pre>
 <span class="c-head">== 5/5 Revisão do Claude</span>        <span class="c-dim"><span lang="pt-BR">olha os reels e corrige</span><span lang="en">reviews and fixes</span></span>
 <span class="c-head">== Pronto em 28 min</span></pre>
           </div>
-          <p lang="pt-BR">Pode deixar rodando e fazer outra coisa, mas <b>não feche o terminal</b> até aparecer "Pronto". As prévias ficam em <code>publicar/rapido/</code> e o porquê de cada corte em <code>edit/roteiros/</code>. Gostou? <code>./ae produzir</code> gera a versão final. Quer mudar algo? <code>./ae revisar --pedido "o que mudar"</code>.</p>
-          <p lang="en">You can leave it running and do something else, but <b>don't close the terminal</b> until it says "Pronto" (done). Previews land in <code>publicar/rapido/</code> and the reasoning for each cut in <code>edit/roteiros/</code>. Like it? <code>./ae produzir</code> renders the final version. Want changes? <code>./ae revisar --pedido "what to change"</code>.</p>
+          <p lang="pt-BR">Pode deixar rodando e fazer outra coisa, mas <b>não feche o terminal</b> até aparecer "Pronto". As prévias ficam em <code>publicar/rapido/</code> e o porquê de cada corte em <code>edit/roteiros/</code>. Gostou? <code>./ae produzir</code> gera a versão final. Quer mudar algo? <code>./ae revisar --pedido "o que mudar"</code>. Todas as opções (só um trecho, mais cortes, arquivo local…) estão em <a href="como-funciona.html#comandos">Comandos e receitas</a>.</p>
+          <p lang="en">You can leave it running and do something else, but <b>don't close the terminal</b> until it says "Pronto" (done). Previews land in <code>publicar/rapido/</code> and the reasoning for each cut in <code>edit/roteiros/</code>. Like it? <code>./ae produzir</code> renders the final version. Want changes? <code>./ae revisar --pedido "what to change"</code>. Every option (just a part, more cuts, local file…) is in <a href="como-funciona.html#comandos">Commands and recipes</a>.</p>
         </div>
       </li>
     </ol>
@@ -448,7 +460,7 @@ Próximo passo: ./ae demo</pre>
           <thead><tr><th lang="pt-BR">sintoma</th><th lang="en">symptom</th><th lang="pt-BR">o que fazer</th><th lang="en">what to do</th></tr></thead>
           <tbody>
             <tr><td style="white-space:normal">claude: command not found</td><td><span lang="pt-BR">Feche e abra o terminal. Se continuar: <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.bashrc</code> e <code>source ~/.bashrc</code> (no Mac, <code>~/.zshrc</code>).</span><span lang="en">Close and reopen the terminal. If it persists: <code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.bashrc</code> and <code>source ~/.bashrc</code> (on a Mac, <code>~/.zshrc</code>).</span></td></tr>
-            <tr><td style="white-space:normal">Permission denied (./instalar.sh, ./ae)</td><td><code>chmod +x instalar.sh ae</code></td></tr>
+            <tr><td style="white-space:normal">Permission denied (./instalar.sh, ./ae)</td><td><code>chmod +x instalar.sh ae skill/corte-viral/scripts/ae</code></td></tr>
             <tr><td style="white-space:normal"><span lang="pt-BR">macOS: precisa do bash 4</span><span lang="en">macOS: needs bash 4</span></td><td><span lang="pt-BR"><code>brew install bash</code>, feche e abra o Terminal; <code>bash --version</code> deve mostrar 5.</span><span lang="en"><code>brew install bash</code>, close and reopen Terminal; <code>bash --version</code> should show 5.</span></td></tr>
             <tr><td style="white-space:normal">ENETUNREACH / Headless Shell</td><td><span lang="pt-BR">Comum no WSL, que não tem IPv6: </span><span lang="en">Common on WSL, which has no IPv6: </span><code>cd remotion && NODE_OPTIONS=--dns-result-order=ipv4first npx remotion browser ensure && cd ..</code></td></tr>
             <tr><td style="white-space:normal">error while loading shared libraries</td><td><span lang="pt-BR">Faltam bibliotecas do navegador. Rode de novo os comandos de bibliotecas do passo 1 (Linux/WSL).</span><span lang="en">Browser libraries are missing. Re-run the library commands from step 1 (Linux/WSL).</span></td></tr>
@@ -470,6 +482,7 @@ Próximo passo: ./ae demo</pre>
         <h3 lang="pt-BR">Atualizar</h3><h3 lang="en">Update</h3>
 <pre class="code" style="margin-top:12px"><code>cd ~/claude-ai-shorts-editor
 git pull
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
 ./instalar.sh</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></pre>
       </div>
       <div>

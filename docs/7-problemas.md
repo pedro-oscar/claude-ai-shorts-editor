@@ -27,7 +27,7 @@ No macOS, troque `~/.bashrc` por `~/.zshrc`.
 ### `Permission denied` ao rodar `./instalar.sh` ou `./ae`
 
 ```bash
-chmod +x instalar.sh ae
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
 ```
 
 ### macOS: `O ./ae precisa do bash 4 ou mais novo`

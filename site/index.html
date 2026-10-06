@@ -304,6 +304,27 @@ var q=new URLSearchParams(location.search).get('lang');var l=(q==='en'||q==='pt'
   </div>
 </section>
 
+<!-- ============================== RECEITAS ============================== -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 lang="pt-BR">Um comando, várias receitas.</h2>
+      <h2 lang="en">One command, many recipes.</h2>
+      <p class="lede" lang="pt-BR">O <code>./ae auto</code> aceita opções para cada situação. Coloque links sempre entre aspas.</p>
+      <p class="lede" lang="en"><code>./ae auto</code> takes options for each situation. Always put links in quotes.</p>
+    </div>
+      <div class="recipes">
+        <div class="recipe"><p><span lang="pt-BR">Cortar só um trecho de um vídeo longo</span><span lang="en">Cut just one part of a long video</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --trecho 30:00 1:15:00</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Usar um vídeo do meu computador</span><span lang="en">Use a video from my computer</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto ~/Videos/meu-podcast.mp4</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Mais (ou menos) reels</span><span lang="en">More (or fewer) reels</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --cortes 10</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Prévia rápida antes da versão final</span><span lang="en">Quick preview before the final version</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --rapido</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Dar instruções ao Claude</span><span lang="en">Give Claude instructions</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --pedido "tom leve"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Corrigir algo depois</span><span lang="en">Fix something afterwards</span></p><div class="cmd"><code><span class="p">$ </span>./ae revisar --pedido "o c02 começa devagar"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+      </div>
+    <p style="margin-top:22px"><a href="como-funciona.html#comandos"><span lang="pt-BR">Ver todos os comandos e opções →</span><span lang="en">See every command and option →</span></a></p>
+  </div>
+</section>
+
 <!-- ============================== REQUISITOS ============================== -->
 <section class="sec band">
   <div class="wrap split">

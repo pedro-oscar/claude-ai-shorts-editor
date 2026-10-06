@@ -46,9 +46,70 @@ Já sabe mexer com terminal? Versão curta:
 ```bash
 git clone https://github.com/pedro-oscar/claude-ai-shorts-editor.git
 cd claude-ai-shorts-editor
+chmod +x instalar.sh ae skill/corte-viral/scripts/ae
 ./instalar.sh
 ./ae auto "https://www.youtube.com/watch?v=XXXX" --rapido
 ```
+
+O `chmod +x` dá permissão de execução ao instalador e ao `./ae` (que é um atalho para `skill/corte-viral/scripts/ae`). Se aparecer `Permission denied` ao rodar qualquer um deles, é esse comando que resolve.
+
+## Receitas
+
+Sempre dentro da pasta do projeto (`cd ~/claude-ai-shorts-editor`). Coloque links **entre aspas**.
+
+| Quero… | Comando |
+|---|---|
+| Cortar só um trecho de um vídeo longo do YouTube | `./ae auto "URL" --trecho 30:00 1:15:00` |
+| Usar um vídeo do meu computador | `./ae auto ~/Videos/meu-podcast.mp4` (no WSL: `/mnt/c/Users/SEU_USUARIO/Videos/…`) |
+| Mais ou menos reels | `./ae auto "URL" --cortes 10` |
+| Ver uma prévia rápida antes | `./ae auto "URL" --rapido` e, se gostar, `./ae produzir` |
+| Dar instruções ao Claude | `./ae auto "URL" --pedido "público jovem, tom leve, títulos curtos"` |
+| Corrigir algo depois | `./ae revisar --pedido "o c02 começa devagar"` e depois `./ae produzir` |
+| Renderizar só alguns cortes | `./ae produzir --so c01,c03` |
+| Refazer tudo ignorando o cache | `./ae produzir --forcar` |
+| Só baixar um trecho, sem processar | `./ae baixar "URL" 30:00 1:15:00` |
+| Ajudar a transcrição com nomes próprios | `./ae transcrever bruto/video.mp4 "Fulano, Empresa, Termo"` |
+| Apagar os reels gerados de um vídeo | `./ae limpar abc1` (o começo dos nomes em `publicar/`) |
+
+## Todos os comandos
+
+`./ae ajuda` mostra esta lista no terminal.
+
+**`./ae auto <video.mp4 | URL> [opções]`**: faz tudo de uma vez (baixa, transcreve, o Claude escreve o roteiro, valida, produz e o Claude revisa).
+
+| Opção | O que faz |
+|---|---|
+| `--cortes N` | Quantos reels produzir (padrão 6) |
+| `--rapido` | Reels em meia resolução (prévia), em `publicar/rapido/` |
+| `--trecho INÍCIO FIM` | (link) Baixa só esse trecho, ex. `--trecho 30:00 1:10:00` |
+| `--pedido "..."` | Instrução extra para o Claude |
+| `--revisoes N` | Rodadas de revisão do Claude depois de produzir (padrão 1; 0 desliga) |
+| `--modelo M` | Modelo do Claude (padrão: o seu padrão), ex. `--modelo opus` |
+
+**Etapas separadas**
+
+| Comando | O que faz |
+|---|---|
+| `./ae verificar` | Confere ferramentas, GPU, skills, Claude e permissões |
+| `./ae baixar URL [INÍCIO FIM]` | Baixa para `bruto/` (inteiro ou só um trecho) |
+| `./ae transcrever ARQUIVO ["nomes"]` | Transcrição local + `edit/takes_packed.md` |
+| `./ae roteirizar ARQUIVO [--cortes N] [--pedido "..."]` | O Claude escreve `edit/roteiros/<video>.json` |
+| `./ae validar [ROTEIRO]` | Confere o roteiro e gera o resumo `.md` |
+| `./ae produzir [ROTEIRO] [--rapido] [--so c01,c02] [--forcar]` | Renderiza os reels em `publicar/` |
+| `./ae revisar [ROTEIRO] [--pedido "..."]` | O Claude revisa as folhas de revisão e ajusta o roteiro |
+
+**Utilidades**
+
+| Comando | O que faz |
+|---|---|
+| `./ae studio` | Remotion Studio em http://localhost:3000 |
+| `./ae still CHAVE SEGUNDOS` | Imagem de um instante de um reel, em `remotion/out/` |
+| `./ae cena NOME SEGUNDOS [card\|full]` | Prévia de uma cena ilustrada |
+| `./ae tsc` | Checagem de tipos do Remotion |
+| `./ae limpar PREFIXO` | Apaga reels e cortes gerados de um vídeo (mantém o original, a transcrição e o roteiro) |
+| `./ae demo` | Reel de demonstração em `publicar/demo.mp4` |
+
+`ROTEIRO` é opcional: o padrão é o mais recente em `edit/roteiros/`. Os logs do Claude ficam em `edit/logs/`.
 
 ## Do que o projeto é feito
 

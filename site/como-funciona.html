@@ -343,34 +343,61 @@ var q=new URLSearchParams(location.search).get('lang');var l=(q==='en'||q==='pt'
 <section class="step" id="comandos">
   <div class="wrap">
     <span class="step-n">$ ./ae ajuda</span>
-    <h2 lang="pt-BR">Todos os comandos.</h2>
-    <h2 lang="en">Every command.</h2>
-    <div style="margin-top:28px" class="tablewrap">
+    <h2 lang="pt-BR">Comandos e receitas.</h2>
+    <h2 lang="en">Commands and recipes.</h2>
+    <p class="lede" style="margin-top:16px" lang="pt-BR">Tudo roda dentro da pasta do projeto: <code>cd ~/claude-ai-shorts-editor</code>. Coloque links sempre entre aspas.</p>
+    <p class="lede" style="margin-top:16px" lang="en">Everything runs inside the project folder: <code>cd ~/claude-ai-shorts-editor</code>. Always put links in quotes.</p>
+    <div style="margin-top:28px">
+      <div class="recipes">
+        <div class="recipe"><p><span lang="pt-BR">Cortar só um trecho de um vídeo longo</span><span lang="en">Cut just one part of a long video</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --trecho 30:00 1:15:00</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Usar um vídeo do meu computador</span><span lang="en">Use a video from my computer</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto ~/Videos/meu-podcast.mp4</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Mais (ou menos) reels</span><span lang="en">More (or fewer) reels</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --cortes 10</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Prévia rápida antes da versão final</span><span lang="en">Quick preview before the final version</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --rapido</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Dar instruções ao Claude</span><span lang="en">Give Claude instructions</span></p><div class="cmd"><code><span class="p">$ </span>./ae auto "URL" --pedido "tom leve"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Corrigir algo depois</span><span lang="en">Fix something afterwards</span></p><div class="cmd"><code><span class="p">$ </span>./ae revisar --pedido "o c02 começa devagar"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Gerar a versão final (sem chamar o Claude)</span><span lang="en">Render the final version (no Claude call)</span></p><div class="cmd"><code><span class="p">$ </span>./ae produzir</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Renderizar só alguns cortes</span><span lang="en">Render only some cuts</span></p><div class="cmd"><code><span class="p">$ </span>./ae produzir --so c01,c03</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Refazer ignorando o cache</span><span lang="en">Redo everything, ignoring the cache</span></p><div class="cmd"><code><span class="p">$ </span>./ae produzir --forcar</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Só baixar um trecho, sem processar</span><span lang="en">Just download a part, no processing</span></p><div class="cmd"><code><span class="p">$ </span>./ae baixar "URL" 30:00 1:15:00</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Ajudar a transcrição com nomes próprios</span><span lang="en">Help transcription with proper names</span></p><div class="cmd"><code><span class="p">$ </span>./ae transcrever bruto/video.mp4 "Fulano, Empresa"</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+        <div class="recipe"><p><span lang="pt-BR">Apagar os reels gerados de um vídeo</span><span lang="en">Delete the generated reels of a video</span></p><div class="cmd"><code><span class="p">$ </span>./ae limpar abc1</code><button class="copy" type="button"><span lang="pt-BR">copiar</span><span lang="en">copy</span></button></div></div>
+      </div>
+    </div>
+    <h3 style="margin-top:56px" lang="pt-BR">Referência completa</h3>
+    <h3 style="margin-top:56px" lang="en">Full reference</h3>
+    <div style="margin-top:16px" class="tablewrap">
       <table class="ref">
         <thead><tr><th lang="pt-BR">comando</th><th lang="en">command</th><th lang="pt-BR">o que faz</th><th lang="en">what it does</th></tr></thead>
         <tbody>
-          <tr><td>./ae auto &lt;video|URL&gt;</td><td><span lang="pt-BR">Tudo de uma vez: baixa, transcreve, o Claude escreve o roteiro, valida, produz e revisa.</span><span lang="en">Everything at once: download, transcribe, Claude writes the script, validate, produce and review.</span></td></tr>
+          <tr class="grp"><td colspan="2"><span lang="pt-BR">Tudo de uma vez</span><span lang="en">All at once</span></td></tr>
+          <tr><td>./ae auto &lt;video|URL&gt;</td><td><span lang="pt-BR">Baixa, transcreve, o Claude escreve o roteiro, valida, produz e revisa.</span><span lang="en">Downloads, transcribes, Claude writes the script, validates, produces and reviews.</span></td></tr>
           <tr><td>&nbsp;&nbsp;--cortes N</td><td><span lang="pt-BR">Quantos reels produzir (padrão 6).</span><span lang="en">How many reels to produce (default 6).</span></td></tr>
-          <tr><td>&nbsp;&nbsp;--rapido</td><td><span lang="pt-BR">Reels em meia resolução, para prévia, em <code>publicar/rapido/</code>.</span><span lang="en">Half-resolution reels for preview, in <code>publicar/rapido/</code>.</span></td></tr>
-          <tr><td>&nbsp;&nbsp;--trecho INI FIM</td><td><span lang="pt-BR">Baixa só esse trecho do link. Ex.: <code>--trecho 30:00 1:10:00</code>.</span><span lang="en">Downloads only that part of the link. E.g. <code>--trecho 30:00 1:10:00</code>.</span></td></tr>
+          <tr><td>&nbsp;&nbsp;--rapido</td><td><span lang="pt-BR">Reels em meia resolução, para prévia, em <code>publicar/rapido/</code>.</span><span lang="en">Half-resolution preview reels, in <code>publicar/rapido/</code>.</span></td></tr>
+          <tr><td>&nbsp;&nbsp;--trecho INI FIM</td><td><span lang="pt-BR">(link) Baixa só esse trecho. Ex.: <code>--trecho 30:00 1:10:00</code>.</span><span lang="en">(link) Downloads only that part. E.g. <code>--trecho 30:00 1:10:00</code>.</span></td></tr>
           <tr><td>&nbsp;&nbsp;--pedido "…"</td><td><span lang="pt-BR">Instrução extra para o Claude. Ex.: "foco em finanças, tom polêmico".</span><span lang="en">Extra instruction for Claude. E.g. "focus on finance, provocative tone".</span></td></tr>
           <tr><td>&nbsp;&nbsp;--revisoes N</td><td><span lang="pt-BR">Rodadas de revisão depois de produzir (padrão 1; 0 desliga).</span><span lang="en">Review rounds after producing (default 1; 0 turns off).</span></td></tr>
-          <tr><td>&nbsp;&nbsp;--modelo M</td><td><span lang="pt-BR">Modelo do Claude (padrão: o seu padrão).</span><span lang="en">Claude model (default: your default).</span></td></tr>
+          <tr><td>&nbsp;&nbsp;--modelo M</td><td><span lang="pt-BR">Modelo do Claude (padrão: o seu padrão). Ex.: <code>--modelo opus</code>.</span><span lang="en">Claude model (default: your default). E.g. <code>--modelo opus</code>.</span></td></tr>
+          <tr class="grp"><td colspan="2"><span lang="pt-BR">Etapas separadas</span><span lang="en">Separate steps</span></td></tr>
           <tr><td>./ae verificar</td><td><span lang="pt-BR">Confere ferramentas, GPU, skills, login do Claude e permissões.</span><span lang="en">Checks tools, GPU, skills, Claude login and permissions.</span></td></tr>
-          <tr><td>./ae baixar URL [INI FIM]</td><td><span lang="pt-BR">Só baixa, para <code>bruto/</code>.</span><span lang="en">Download only, into <code>bruto/</code>.</span></td></tr>
-          <tr><td>./ae transcrever ARQUIVO</td><td><span lang="pt-BR">Só transcreve e atualiza <code>edit/takes_packed.md</code>.</span><span lang="en">Transcribe only and update <code>edit/takes_packed.md</code>.</span></td></tr>
-          <tr><td>./ae roteirizar ARQUIVO</td><td><span lang="pt-BR">O Claude escreve o roteiro, sem produzir.</span><span lang="en">Claude writes the script, without producing.</span></td></tr>
-          <tr><td>./ae validar</td><td><span lang="pt-BR">Confere o roteiro e gera o resumo <code>.md</code>.</span><span lang="en">Checks the script and generates the <code>.md</code> summary.</span></td></tr>
-          <tr><td>./ae produzir [--so c01,c02]</td><td><span lang="pt-BR">Renderiza os reels do roteiro mais recente (ou só alguns).</span><span lang="en">Renders the reels of the latest script (or just some).</span></td></tr>
-          <tr><td>./ae revisar --pedido "…"</td><td><span lang="pt-BR">O Claude revisa e ajusta o roteiro a partir do seu pedido.</span><span lang="en">Claude reviews and adjusts the script based on your request.</span></td></tr>
+          <tr><td>./ae baixar URL [INI FIM]</td><td><span lang="pt-BR">Baixa para <code>bruto/</code>, inteiro ou só um trecho.</span><span lang="en">Downloads into <code>bruto/</code>, whole or just a part.</span></td></tr>
+          <tr><td>./ae transcrever ARQUIVO ["nomes"]</td><td><span lang="pt-BR">Transcrição local e <code>edit/takes_packed.md</code>. Os nomes ajudam o Whisper a acertar nomes próprios.</span><span lang="en">Local transcription and <code>edit/takes_packed.md</code>. The names help Whisper get proper nouns right.</span></td></tr>
+          <tr><td>./ae roteirizar ARQUIVO [--cortes N] [--pedido "…"]</td><td><span lang="pt-BR">O Claude escreve <code>edit/roteiros/&lt;video&gt;.json</code>, sem produzir.</span><span lang="en">Claude writes <code>edit/roteiros/&lt;video&gt;.json</code>, without producing.</span></td></tr>
+          <tr><td>./ae validar [ROTEIRO]</td><td><span lang="pt-BR">Confere o roteiro e gera o resumo <code>.md</code>.</span><span lang="en">Checks the script and generates the <code>.md</code> summary.</span></td></tr>
+          <tr><td>./ae produzir [ROTEIRO] [--rapido] [--so c01,c02] [--forcar]</td><td><span lang="pt-BR">Renderiza os reels em <code>publicar/</code>. <code>--so</code> escolhe cortes; <code>--forcar</code> ignora o cache e refaz tudo.</span><span lang="en">Renders the reels into <code>publicar/</code>. <code>--so</code> picks cuts; <code>--forcar</code> ignores the cache and redoes everything.</span></td></tr>
+          <tr><td>./ae revisar [ROTEIRO] [--pedido "…"]</td><td><span lang="pt-BR">O Claude revisa as folhas de revisão e ajusta o roteiro.</span><span lang="en">Claude reviews the review sheets and adjusts the script.</span></td></tr>
+          <tr class="grp"><td colspan="2"><span lang="pt-BR">Utilidades</span><span lang="en">Utilities</span></td></tr>
           <tr><td>./ae studio</td><td><span lang="pt-BR">Remotion Studio em <code>localhost:3000</code>.</span><span lang="en">Remotion Studio at <code>localhost:3000</code>.</span></td></tr>
-          <tr><td>./ae still CHAVE SEG</td><td><span lang="pt-BR">Imagem de um instante de um reel.</span><span lang="en">Still image of a moment in a reel.</span></td></tr>
-          <tr><td>./ae cena NOME SEG</td><td><span lang="pt-BR">Prévia de uma cena ilustrada.</span><span lang="en">Preview of an illustrated scene.</span></td></tr>
-          <tr><td>./ae demo</td><td><span lang="pt-BR">Reel de demonstração com todos os motions, sem vídeo de entrada.</span><span lang="en">Demo reel with every motion, no input video needed.</span></td></tr>
-          <tr><td>./ae limpar PREFIXO</td><td><span lang="pt-BR">Apaga reels e cortes gerados de um vídeo (mantém fonte, transcrição e roteiro).</span><span lang="en">Deletes generated reels and cuts for a video (keeps source, transcript and script).</span></td></tr>
+          <tr><td>./ae still CHAVE SEG</td><td><span lang="pt-BR">Imagem de um instante de um reel, em <code>remotion/out/</code>.</span><span lang="en">Still image of a moment in a reel, in <code>remotion/out/</code>.</span></td></tr>
+          <tr><td>./ae cena NOME SEG [card|full]</td><td><span lang="pt-BR">Prévia de uma cena ilustrada.</span><span lang="en">Preview of an illustrated scene.</span></td></tr>
+          <tr><td>./ae tsc</td><td><span lang="pt-BR">Checagem de tipos do Remotion.</span><span lang="en">Remotion type check.</span></td></tr>
+          <tr><td>./ae limpar PREFIXO</td><td><span lang="pt-BR">Apaga reels e cortes gerados de um vídeo (mantém original, transcrição e roteiro).</span><span lang="en">Deletes generated reels and cuts for a video (keeps source, transcript and script).</span></td></tr>
+          <tr><td>./ae demo</td><td><span lang="pt-BR">Reel de demonstração com todos os motions, em <code>publicar/demo.mp4</code>.</span><span lang="en">Demo reel with every motion, in <code>publicar/demo.mp4</code>.</span></td></tr>
+          <tr><td>./ae ajuda</td><td><span lang="pt-BR">Mostra esta lista no terminal.</span><span lang="en">Shows this list in the terminal.</span></td></tr>
         </tbody>
       </table>
     </div>
+    <p class="muted" style="margin-top:12px;font-size:.9rem" lang="pt-BR"><code>ROTEIRO</code> é opcional: o padrão é o mais recente em <code>edit/roteiros/</code>. Os logs do Claude ficam em <code>edit/logs/</code>.</p>
+    <p class="muted" style="margin-top:12px;font-size:.9rem" lang="en"><code>ROTEIRO</code> (script) is optional: the default is the latest in <code>edit/roteiros/</code>. Claude's logs are in <code>edit/logs/</code>.</p>
   </div>
 </section>
 
