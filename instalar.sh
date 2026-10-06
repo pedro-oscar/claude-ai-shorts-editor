@@ -13,7 +13,8 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_SRC="$REPO/skill/corte-viral"
 SKILLS="$HOME/.claude/skills"
 VU="$SKILLS/video-use"
-export PATH="$HOME/.local/bin:$PATH"
+# ~/.local/bin: uv, yt-dlp, claude · /usr/lib/wsl/lib: nvidia-smi no WSL
+export PATH="$HOME/.local/bin:$PATH:/usr/lib/wsl/lib"
 cd "$REPO"
 
 ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
@@ -85,9 +86,12 @@ ok "dependências do video-use"
 step "4/7 Python da corte-viral (Whisper, OpenCV)"
 uv venv --quiet --allow-existing --python 3.12 "$SKILL_SRC/.venv"
 uv pip install --quiet --python "$SKILL_SRC/.venv/bin/python" -r "$SKILL_SRC/scripts/requirements.txt"
-if [ "$(uname)" = "Linux" ] && command -v nvidia-smi >/dev/null && nvidia-smi -L >/dev/null 2>&1; then
+# mesma checagem que o Whisper usa: se ele enxerga a GPU, precisa das bibliotecas CUDA
+gpus=$("$SKILL_SRC/.venv/bin/python" -c 'import ctranslate2; print(ctranslate2.get_cuda_device_count())' 2>/dev/null || echo 0)
+if [ "$(uname)" = "Linux" ] && [ "${gpus:-0}" -gt 0 ]; then
   uv pip install --quiet --python "$SKILL_SRC/.venv/bin/python" -r "$SKILL_SRC/scripts/requirements-gpu.txt"
-  ok "GPU NVIDIA encontrada: $(nvidia-smi -L | head -1 | cut -d'(' -f1)"
+  nome=$(nvidia-smi -L 2>/dev/null | head -1 | cut -d'(' -f1 || true)
+  ok "GPU NVIDIA encontrada${nome:+: $nome}"
 else
   aviso "sem GPU NVIDIA: a transcrição vai rodar no processador (funciona, só é mais lenta)"
 fi

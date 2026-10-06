@@ -15,7 +15,8 @@ VU="${VIDEO_USE:-$HOME/.claude/skills/video-use}"
 PY="$SK/.venv/bin/python"
 VPY="$VU/.venv/bin/python"
 FPS=30
-export PATH="$HOME/.local/bin:$PATH"
+# ~/.local/bin: uv, yt-dlp, claude · /usr/lib/wsl/lib: nvidia-smi no WSL
+export PATH="$HOME/.local/bin:$PATH:/usr/lib/wsl/lib"
 cd "$ROOT"
 # .env opcional (ex.: CLAUDE_CODE_OAUTH_TOKEN gerado com `claude setup-token`)
 if [ -f .env ]; then set -a; . ./.env; set +a; fi
@@ -100,7 +101,8 @@ verificar() {
   ls remotion/node_modules/.remotion/chrome-headless-shell/*/*/chrome-headless-shell >/dev/null 2>&1 \
     && ok "Chrome headless do Remotion" || bad "rode: cd remotion && npx remotion browser ensure"
   local naoeditaveis
-  naoeditaveis=$(find . "$SK" -path ./remotion/node_modules -prune -o ! -writable -print 2>/dev/null | head -5)
+  # .git/objects é somente leitura por natureza; node_modules e .venv são grandes e não interessam
+  naoeditaveis=$(find . "$SK"/ \( -name .git -o -name node_modules -o -name .venv \) -prune -o ! -writable -print 2>/dev/null | head -5 || true)
   [ -z "$naoeditaveis" ] && ok "todos os arquivos editáveis por $(whoami)" \
     || bad "arquivos sem permissão de escrita (criados como root?): $naoeditaveis … corrija com: sudo chown -R $(whoami): $ROOT $SK"
   echo

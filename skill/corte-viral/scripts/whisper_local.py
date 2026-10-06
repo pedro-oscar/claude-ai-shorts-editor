@@ -75,6 +75,14 @@ def pick_device(requested: str) -> tuple[str, str]:
 
     if requested == "cpu" or (requested == "auto" and ctranslate2.get_cuda_device_count() == 0):
         return "cpu", "int8"
+    # A GPU aparece, mas o cuBLAS só é carregado na primeira transcrição; sem ele, falharia no meio.
+    try:
+        ctypes.CDLL("libcublas.so.12")
+    except OSError:
+        if requested == "cuda":
+            raise
+        print("GPU encontrada, mas sem as bibliotecas CUDA (rode ./instalar.sh de novo). Usando o processador.")
+        return "cpu", "int8"
     return "cuda", "float16"
 
 
@@ -149,8 +157,9 @@ def main() -> None:
         minutos = len(audio) / 16000 / 60
         nome = args.model
         if nome == "auto":
-            # large-v3 é ~5× mais lento que o turbo; o ganho (mais vícios de fala) só compensa em vídeos curtos
-            nome = "large-v3" if minutos <= AUTO_LIMITE_MIN else "large-v3-turbo"
+            # large-v3 é ~5× mais lento que o turbo; o ganho (mais vícios de fala) só compensa em vídeos
+            # curtos e na GPU. No processador, sempre turbo.
+            nome = "large-v3" if device == "cuda" and minutos <= AUTO_LIMITE_MIN else "large-v3-turbo"
         if nome not in modelos:
             print(f"carregando {nome} em {device} ({compute})…", flush=True)
             modelos[nome] = WhisperModel(nome, device=device, compute_type=compute)
