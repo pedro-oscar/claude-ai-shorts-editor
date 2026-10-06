@@ -1,0 +1,332 @@
+#!/usr/bin/env bash
+# claude-ai-shorts-editor — vídeo longo → reels 9:16. O Claude escreve o roteiro; este script executa.
+# Uso: ./ae auto <video.mp4 | URL>   ·   ./ae ajuda
+set -euo pipefail
+
+if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
+  echo "O ./ae precisa do bash 4 ou mais novo (o seu é $BASH_VERSION). No macOS: brew install bash e abra um terminal novo."
+  exit 1
+fi
+
+# ROOT = pasta de onde o ./ae foi chamado (funciona mesmo quando ./ae é um link para a skill)
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SK="${CORTE_VIRAL:-$HOME/.claude/skills/corte-viral}"
+VU="${VIDEO_USE:-$HOME/.claude/skills/video-use}"
+PY="$SK/.venv/bin/python"
+VPY="$VU/.venv/bin/python"
+FPS=30
+export PATH="$HOME/.local/bin:$PATH"
+cd "$ROOT"
+# .env opcional (ex.: CLAUDE_CODE_OAUTH_TOKEN gerado com `claude setup-token`)
+if [ -f .env ]; then set -a; . ./.env; set +a; fi
+
+ok()   { printf '  \033[32m✓\033[0m %s\n' "$*"; }
+bad()  { printf '  \033[31m✗\033[0m %s\n' "$*"; FALHAS=$((FALHAS + 1)); }
+step() { printf '\n\033[1;36m== %s\033[0m\n' "$*"; }
+die()  { printf '\033[31merro:\033[0m %s\n' "$*" >&2; exit 1; }
+warn() { printf '  \033[33m!\033[0m %s\n' "$*"; }
+# timeout não existe no macOS; sem ele, roda sem limite de tempo
+com_limite() { if command -v timeout >/dev/null; then timeout "$@"; else shift; "$@"; fi; }
+
+# "75", "1:15", "01:01:15.5" → segundos
+secs() {
+  python3 -c 'import sys
+s=0
+for x in sys.argv[1].split(":"): s=s*60+float(x)
+print(round(s,3))' "$1"
+}
+
+ajuda() {
+  cat <<'EOF'
+claude-ai-shorts-editor
+
+  ./ae auto <video.mp4 | URL> [opções]   tudo de uma vez: baixa, transcreve, o Claude escreve o
+                                         roteiro, valida, produz e o Claude revisa
+      --cortes N        quantos reels produzir (padrão 6)
+      --rapido          reels em meia resolução (prévia) → publicar/rapido/
+      --revisoes N      rodadas de revisão do Claude depois de produzir (padrão 1; 0 desliga)
+      --trecho INI FIM  (URL) baixa só esse trecho, ex. --trecho 30:00 1:10:00
+      --pedido "..."    instrução extra para o Claude (ex. "foco em finanças, tom polêmico")
+      --modelo M        modelo do Claude (padrão: o seu padrão)
+
+  Etapas separadas
+  ./ae verificar                       confere ferramentas, GPU, skills, Claude e permissões
+  ./ae baixar URL [INI FIM]            baixa para bruto/
+  ./ae transcrever ARQUIVO ["nomes"]   transcrição local (Whisper na GPU) + edit/takes_packed.md
+  ./ae roteirizar ARQUIVO [--cortes N] [--pedido "..."]   o Claude escreve edit/roteiros/<video>.json
+  ./ae validar [ROTEIRO]               confere o roteiro e gera o resumo .md
+  ./ae produzir [ROTEIRO] [--rapido] [--so c01,c02] [--forcar]   renderiza os reels → publicar/
+  ./ae revisar [ROTEIRO] [--pedido "..."]   o Claude revisa as folhas de revisão e ajusta o roteiro
+
+  Utilidades
+  ./ae studio            Remotion Studio em http://localhost:3000
+  ./ae still CHAVE SEG   imagem de um instante de um reel → remotion/out/
+  ./ae cena NOME SEG [card|full]   prévia de uma cena ilustrada com as props de exemplo
+  ./ae tsc               checagem de tipos do Remotion
+  ./ae limpar PREFIXO    apaga reels/cortes gerados de um vídeo (mantém bruto, transcrição e roteiro)
+  ./ae demo              reel de demonstração → publicar/demo.mp4
+
+ROTEIRO padrão = o mais recente em edit/roteiros/. Logs do Claude em edit/logs/.
+EOF
+}
+
+# ------------------------------------------------------------------ verificação
+
+verificar() {
+  FALHAS=0
+  step "Ferramentas"
+  for c in ffmpeg ffprobe yt-dlp uv node npm python3 claude; do
+    if command -v "$c" >/dev/null; then ok "$c $("$c" --version 2>&1 | head -1 | cut -c1-60)"; else bad "$c não encontrado"; fi
+  done
+  step "GPU"
+  if command -v nvidia-smi >/dev/null && nvidia-smi -L >/dev/null 2>&1; then ok "$(nvidia-smi -L | head -1)"; else warn "sem GPU NVIDIA: a transcrição roda no processador (funciona, só é mais lenta)"; fi
+  step "Skills"
+  [ -f "$SK/SKILL.md" ] && ok "corte-viral em $SK" || bad "corte-viral não encontrada em $SK"
+  [ -f "$VU/SKILL.md" ] && ok "video-use em $VU" || bad "video-use não encontrado em $VU"
+  "$PY" -c 'import cv2, faster_whisper' 2>/dev/null && ok "python da corte-viral (opencv + faster-whisper)" || bad "venv da corte-viral incompleto: $PY"
+  "$PY" -c 'import sys; sys.path.insert(0, "'"$SK"'/scripts"); import whisper_local as w; w.preload_cuda_libs(); import ctranslate2; sys.exit(0 if ctranslate2.get_cuda_device_count() else 1)' 2>/dev/null \
+    && ok "faster-whisper enxerga a GPU" || warn "faster-whisper vai usar o processador (sem GPU NVIDIA)"
+  "$VPY" "$VU/helpers/timeline_view.py" --help >/dev/null 2>&1 && ok "helpers do video-use" || bad "venv do video-use incompleto: $VPY"
+  step "Claude"
+  if [ "${1:-}" = "--rapido" ]; then
+    ok "(login do Claude não testado)"
+  elif printf 'Responda só: OK' | com_limite 120 claude -p --output-format json 2>/dev/null | grep -q '"is_error":false'; then
+    ok "claude -p autenticado"
+  else
+    bad "claude -p não respondeu. Rode 'claude' uma vez para logar, ou gere um token com 'claude setup-token' e salve em .env como CLAUDE_CODE_OAUTH_TOKEN=..."
+  fi
+  step "Projeto"
+  [ -d remotion/node_modules ] && ok "remotion/node_modules instalado" || bad "rode: cd remotion && npm install"
+  ls remotion/node_modules/.remotion/chrome-headless-shell/*/*/chrome-headless-shell >/dev/null 2>&1 \
+    && ok "Chrome headless do Remotion" || bad "rode: cd remotion && npx remotion browser ensure"
+  local naoeditaveis
+  naoeditaveis=$(find . "$SK" -path ./remotion/node_modules -prune -o ! -writable -print 2>/dev/null | head -5)
+  [ -z "$naoeditaveis" ] && ok "todos os arquivos editáveis por $(whoami)" \
+    || bad "arquivos sem permissão de escrita (criados como root?): $naoeditaveis … corrija com: sudo chown -R $(whoami): $ROOT $SK"
+  echo
+  [ "$FALHAS" -eq 0 ] && printf '\033[32mTudo pronto.\033[0m\n' || { printf '\033[31m%s problema(s).\033[0m\n' "$FALHAS"; return 1; }
+}
+
+# ------------------------------------------------------------------ etapas
+
+YTDLP_FMT=(--impersonate chrome -S "res:1080,proto:https,vcodec:h264,acodec:m4a" -f "bv*+ba/b" --merge-output-format mp4)
+
+baixar() {
+  [ $# -ge 1 ] || die "uso: ./ae baixar URL [INICIO FIM]"
+  local extra=()
+  if [ $# -ge 3 ]; then extra=(--download-sections "*$(secs "$2")-$(secs "$3")" --force-keyframes-at-cuts); fi
+  # https + H.264: formatos HLS (m3u8) costumam falhar no recorte por trecho
+  yt-dlp "${YTDLP_FMT[@]}" -o "bruto/%(id)s.%(ext)s" --progress --print after_move:filepath "${extra[@]}" "$1" | tail -1
+}
+
+transcrever() {
+  [ $# -ge 1 ] || die "uso: ./ae transcrever ARQUIVO [\"nomes próprios\"]"
+  local args=("$1" --edit-dir edit)
+  [ -n "${2:-}" ] && args+=(--hotwords "$2")
+  "$PY" "$SK/scripts/whisper_local.py" "${args[@]}"
+  "$VPY" "$VU/helpers/pack_transcripts.py" --edit-dir edit >/dev/null
+  ok "edit/takes_packed.md atualizado"
+}
+
+roteiro_padrao() {
+  local r; r=$(ls -t edit/roteiros/*.json 2>/dev/null | head -1 || true)
+  [ -n "$r" ] || die "nenhum roteiro em edit/roteiros/ — rode ./ae auto ou ./ae roteirizar"
+  echo "$r"
+}
+
+validar() {
+  local rot="${1:-$(roteiro_padrao)}"; [ $# -gt 0 ] && shift
+  "$PY" "$SK/scripts/produzir.py" "$rot" --validar "$@"
+}
+
+produzir() {
+  local rot
+  if [ $# -gt 0 ] && [[ "$1" != --* ]]; then rot="$1"; shift; else rot="$(roteiro_padrao)"; fi
+  "$PY" "$SK/scripts/produzir.py" "$rot" "$@"
+}
+
+tsc() { (cd remotion && npx tsc --noEmit) && ok "tipos ok"; }
+
+# Chama o Claude Code sem interação, com permissões restritas ao que a etapa precisa.
+# uso: claude_tarefa <prompt.md> <nome> KEY=VAL...
+ULTIMO_RESULTADO=""
+claude_tarefa() {
+  local tpl="$1" nome="$2"; shift 2
+  local ts; ts=$(date +%Y%m%d-%H%M%S)
+  mkdir -p edit/logs
+  local log="edit/logs/$ts-$nome.jsonl" res="edit/logs/$ts-$nome.txt"
+  local prompt
+  prompt=$(python3 - "$tpl" "$SK" "$@" <<'PY'
+import sys
+tpl = open(sys.argv[1], encoding="utf-8").read()
+vals = {"SKILL": sys.argv[2], "EXTRA": ""}
+for kv in sys.argv[3:]:
+    k, _, v = kv.partition("=")
+    vals[k] = v
+for k, v in vals.items():
+    tpl = tpl.replace("{" + k + "}", v)
+print(tpl)
+PY
+)
+  # --strict-mcp-config sem --mcp-config: nenhum conector MCP (mais rápido, sem ruído de conectores)
+  local args=(-p --output-format stream-json --verbose --strict-mcp-config
+    --permission-mode acceptEdits --add-dir "$SK"
+    --allowedTools Read Write Edit MultiEdit Glob Grep Skill Task Agent TodoWrite
+      "Bash(./ae validar:*)" "Bash(./ae tsc:*)" "Bash(./ae still:*)" "Bash(./ae cena:*)"
+      "Bash(python3:*)" "Bash(grep:*)" "Bash(ls:*)" "Bash(head:*)" "Bash(tail:*)" "Bash(wc:*)" "Bash(sed -n:*)" "Bash(cat:*)"
+    --disallowedTools "Bash(./ae produzir:*)" "Bash(./ae auto:*)" "Bash(./ae baixar:*)" "Bash(rm:*)" WebFetch WebSearch)
+  [ -n "${MODELO:-}" ] && args+=(--model "$MODELO")
+  printf '\033[90m  log: %s\033[0m\n' "$log"
+  printf '%s' "$prompt" | claude "${args[@]}" | "$PY" "$SK/scripts/claude_stream.py" "$log" "$res"
+  ULTIMO_RESULTADO="$res"
+}
+
+roteirizar() {
+  [ $# -ge 1 ] || die "uso: ./ae roteirizar ARQUIVO [--cortes N] [--pedido \"...\"]"
+  local video="$1"; shift
+  local cortes=6 pedido=""
+  while [ $# -gt 0 ]; do case "$1" in
+    --cortes) cortes="$2"; shift 2 ;;
+    --pedido) pedido="$2"; shift 2 ;;
+    --modelo) MODELO="$2"; shift 2 ;;
+    *) die "opção desconhecida: $1" ;;
+  esac; done
+  local stem; stem=$(basename "${video%.*}")
+  [ -f "edit/transcripts/$stem.json" ] || die "falta a transcrição de $video — rode ./ae transcrever $video"
+  mkdir -p edit/roteiros
+  local rot="edit/roteiros/$stem.json" extra=""
+  [ -n "$pedido" ] && extra=$'\n## Pedido do usuário\n\n'"$pedido"$'\n'
+  claude_tarefa "$SK/prompts/roteirizar.md" roteirizar \
+    "VIDEO=$video" "STEM=$stem" "ROTEIRO=$rot" "CORTES=$cortes" "EXTRA=$extra"
+  [ -f "$rot" ] || die "o Claude não gerou $rot (veja o log em edit/logs/)"
+  validar "$rot"
+  ROTEIRO_ATUAL="$rot"
+}
+
+# retorna 0 se o roteiro mudou, 3 se não mudou
+revisar() {
+  local rot="" pedido=""
+  while [ $# -gt 0 ]; do case "$1" in
+    --pedido) pedido="$2"; shift 2 ;;
+    --modelo) MODELO="$2"; shift 2 ;;
+    *) rot="$1"; shift ;;
+  esac; done
+  rot="${rot:-$(roteiro_padrao)}"
+  [ -f edit/producao.json ] || die "nada produzido ainda — rode ./ae produzir"
+  local extra=""
+  [ -n "$pedido" ] && extra=$'\n## Pedido do usuário\n\n'"$pedido"$'\n'
+  claude_tarefa "$SK/prompts/revisar.md" revisar "ROTEIRO=$rot" "EXTRA=$extra"
+  if tail -n 3 "$ULTIMO_RESULTADO" | grep -q "ROTEIRO_ATUALIZADO"; then
+    validar "$rot"; return 0
+  fi
+  return 3
+}
+
+auto() {
+  [ $# -ge 1 ] || die "uso: ./ae auto <video.mp4 | URL> [--cortes N] [--rapido] [--revisoes N] [--trecho INI FIM] [--pedido \"...\"]"
+  local entrada="$1"; shift
+  local cortes=6 rapido=() revisoes=1 pedido="" trecho=()
+  while [ $# -gt 0 ]; do case "$1" in
+    --cortes) cortes="$2"; shift 2 ;;
+    --rapido) rapido=(--rapido); shift ;;
+    --revisoes) revisoes="$2"; shift 2 ;;
+    --pedido) pedido="$2"; shift 2 ;;
+    --trecho) trecho=("$2" "$3"); shift 3 ;;
+    --modelo) MODELO="$2"; shift 2 ;;
+    *) die "opção desconhecida: $1" ;;
+  esac; done
+  local t0=$SECONDS video hot=""
+
+  step "1/5 Fonte"
+  if [[ "$entrada" =~ ^https?:// ]]; then
+    hot=$(yt-dlp --impersonate chrome --skip-download --print "%(title)s · %(channel)s" "$entrada" 2>/dev/null | head -1 || true)
+    ok "título: ${hot:-?}"
+    video=$(baixar "$entrada" "${trecho[@]}")
+    video="bruto/$(basename "$video")"
+  else
+    [ -f "$entrada" ] || die "arquivo não encontrado: $entrada"
+    local abs; abs=$(realpath "$entrada")
+    if [[ "$abs" != "$ROOT"/* ]]; then
+      ln -sf "$abs" "bruto/$(basename "$abs")"; video="bruto/$(basename "$abs")"
+    else
+      video="${abs#"$ROOT"/}"
+    fi
+  fi
+  ok "vídeo: $video"
+
+  step "2/5 Transcrição (Whisper local)"
+  transcrever "$video" "$hot"
+
+  step "3/5 Roteiro (Claude)"
+  roteirizar "$video" --cortes "$cortes" ${pedido:+--pedido "$pedido"}
+  local rot="$ROTEIRO_ATUAL"
+
+  step "4/5 Produção"
+  produzir "$rot" "${rapido[@]}" || true
+
+  local i=1
+  while [ "$i" -le "$revisoes" ]; do
+    step "5/5 Revisão do Claude ($i/$revisoes)"
+    if revisar "$rot"; then
+      step "Produzindo de novo com as correções"
+      produzir "$rot" "${rapido[@]}" || true
+    else
+      ok "o Claude não viu nada para corrigir"; break
+    fi
+    i=$((i + 1))
+  done
+
+  step "Pronto em $(( (SECONDS - t0) / 60 )) min"
+  echo "  roteiro: $rot  (resumo: ${rot%.json}.md)"
+  ls -1 publicar/"${rapido:+rapido/}"*.mp4 2>/dev/null | sed 's/^/  /'
+  echo "  Para ajustar: ./ae revisar --pedido \"o que mudar\"  e depois  ./ae produzir"
+}
+
+still() {
+  [ $# -ge 2 ] || die "uso: ./ae still CHAVE SEGUNDOS"
+  local frame; frame=$(python3 -c "print(int(round($(secs "$2") * $FPS)))")
+  (cd remotion && npx remotion still "reel-$1" "out/$1_t$2.png" --frame="$frame" --log=error)
+  echo "→ remotion/out/$1_t$2.png"
+}
+
+# apaga só o que foi GERADO para um vídeo (cortes, clips, reels); nunca bruto/, transcrição ou roteiro
+limpar() {
+  [ $# -ge 1 ] || die "uso: ./ae limpar PREFIXO   (ex.: abc1 — o começo dos nomes em publicar/)"
+  local p="$1"
+  [[ "$p" =~ ^[a-z0-9-]+$ ]] || die "prefixo inválido: $p"
+  rm -rf edit/cortes/"$p"-* remotion/public/clips/"$p"-* publicar/"$p"-*.mp4 publicar/rapido/"$p"-*.mp4 remotion/out
+  ok "gerados de '$p' apagados (bruto/, transcrição e roteiro mantidos)"
+}
+
+cena() {
+  [ $# -ge 2 ] || die "uso: ./ae cena NOME SEGUNDOS [card|full]"
+  local layout="${3:-card}" frame
+  frame=$(python3 -c "print(int(round($(secs "$2") * $FPS)))")
+  (cd remotion && npx remotion still "cena-$1" "out/cena-$1_t$2_$layout.png" --frame="$frame" \
+     --props="{\"name\":\"$1\",\"layout\":\"$layout\"}" --log=error)
+  echo "→ remotion/out/cena-$1_t$2_$layout.png"
+}
+
+studio() { (cd remotion && npx remotion studio --no-open --port 3000); }
+
+demo() { (cd remotion && npx remotion render reel-demo ../publicar/demo.mp4); }
+
+cmd="${1:-ajuda}"; shift || true
+case "$cmd" in
+  auto) auto "$@" ;;
+  verificar|check) verificar "$@" ;;
+  baixar) baixar "$@" ;;
+  transcrever) transcrever "$@" ;;
+  roteirizar) roteirizar "$@" ;;
+  validar) validar "$@" ;;
+  produzir) produzir "$@" ;;
+  revisar) revisar "$@" || [ $? -eq 3 ] ;;
+  tsc) tsc ;;
+  still) still "$@" ;;
+  cena) cena "$@" ;;
+  limpar) limpar "$@" ;;
+  studio) studio ;;
+  demo) demo ;;
+  ajuda|help|-h|--help) ajuda ;;
+  *) ajuda; exit 1 ;;
+esac

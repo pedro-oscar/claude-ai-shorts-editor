@@ -1,0 +1,4 @@
+# Bibliotecas CUDA 12 para o faster-whisper rodar na GPU NVIDIA (Linux/WSL).
+# whisper_local.py carrega estas libs sozinho; não precisa mexer em LD_LIBRARY_PATH.
+nvidia-cublas-cu12
+nvidia-cudnn-cu12==9.*

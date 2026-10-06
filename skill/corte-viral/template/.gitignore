@@ -1,0 +1,4 @@
+node_modules/
+out/
+public/clips/*/cut.mp4
+.remotion/

@@ -1,0 +1,21 @@
+{
+  "style": {"accent": "#FF2D2D", "highlight": "#FFE600", "captionY": 0.66, "grain": true},
+  "emphasis": ["quebra", "caixa", "sobrevive", "estatística"],
+  "motions": [
+    {"type": "title", "start": 0.2, "end": 3.0, "text": "O erro que quebra empresas"},
+    {"type": "zoom", "start": 4.2, "end": 5.6, "scale": 1.18},
+    {"type": "keyword", "start": 5.05, "end": 6.6, "text": "2º ano", "position": "top"},
+    {"type": "flash", "at": 6.35},
+    {"type": "scene", "name": "Comparacao", "layout": "card", "start": 6.9, "end": 10.3,
+     "props": {"title": "Por que quebra?",
+               "left": {"label": "Falta de cliente", "value": "Raro", "emoji": "🙋"},
+               "right": {"label": "Falta de caixa", "value": "Quase sempre", "emoji": "💸"}}},
+    {"type": "shake", "start": 10.6, "end": 11.9, "intensity": 1},
+    {"type": "scene", "name": "Dinheiro", "layout": "full", "start": 12.1, "end": 14.2,
+     "props": {"label": "Controle o caixa"}},
+    {"type": "scene", "name": "Grafico", "layout": "card", "start": 14.3, "end": 17.0,
+     "props": {"title": "Caixa no mês", "prefix": "R$ ", "suffix": " mil",
+               "bars": [{"label": "Jan", "value": 12}, {"label": "Fev", "value": 18}, {"label": "Mar", "value": 31}]}},
+    {"type": "counter", "start": 17.1, "end": 19.3, "from": 0, "to": 31000, "prefix": "R$ ", "label": "em caixa"}
+  ]
+}

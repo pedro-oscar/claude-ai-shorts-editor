@@ -1,0 +1,21 @@
+# Seus vídeos e resultados nunca vão para o git
+bruto/*
+!bruto/.gitkeep
+edit/*
+!edit/.gitkeep
+publicar/*
+!publicar/.gitkeep
+
+# Criados pelo instalador (./instalar.sh)
+remotion/
+skill/corte-viral/.venv/
+skill/corte-viral/scripts/models/
+.claude/skills/
+.agents/
+skills-lock.json
+
+# Segredos e lixo
+.env
+__pycache__/
+:memory:*
+.DS_Store
