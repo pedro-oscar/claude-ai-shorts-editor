@@ -38,7 +38,17 @@ sys.path.insert(0, str(HERE))
 from edl_captions import build as build_captions  # noqa: E402
 
 SKILL = HERE.parent
-VIDEO_USE = Path(os.environ.get("VIDEO_USE", SKILL.parent / "video-use"))
+
+
+def _achar_video_use() -> Path:
+    if os.environ.get("VIDEO_USE"):
+        return Path(os.environ["VIDEO_USE"])
+    # SKILL vem de resolve(): se corte-viral for symlink para o repo, SKILL.parent é o repo, não ~/.claude/skills
+    candidatos = [SKILL.parent / "video-use", Path.home() / ".claude" / "skills" / "video-use"]
+    return next((c for c in candidatos if (c / "SKILL.md").exists()), candidatos[-1])
+
+
+VIDEO_USE = _achar_video_use()
 VU_PY = VIDEO_USE / ".venv" / "bin" / "python"
 FPS = 30
 
