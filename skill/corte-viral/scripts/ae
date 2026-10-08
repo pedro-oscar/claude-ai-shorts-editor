@@ -10,8 +10,10 @@ fi
 
 # ROOT = pasta de onde o ./ae foi chamado (funciona mesmo quando ./ae é um link para a skill)
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SK="${CORTE_VIRAL:-$HOME/.claude/skills/corte-viral}"
-VU="${VIDEO_USE:-$HOME/.claude/skills/video-use}"
+# skills: as do próprio projeto (skill/), senão as instaladas em ~/.claude/skills (./ae copiado para outro projeto)
+primeira() { for d in "$@"; do [ -f "$d/SKILL.md" ] && { echo "$d"; return; }; done; echo "$1"; }
+SK="${CORTE_VIRAL:-$(primeira "$ROOT/skill/corte-viral" "$HOME/.claude/skills/corte-viral")}"
+VU="${VIDEO_USE:-$(primeira "$ROOT/skill/video-use" "$SK/../video-use" "$HOME/.claude/skills/video-use")}"
 PY="$SK/.venv/bin/python"
 VPY="$VU/.venv/bin/python"
 FPS=30

@@ -12,7 +12,7 @@ fi
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILL_SRC="$REPO/skill/corte-viral"
 SKILLS="$HOME/.claude/skills"
-VU="$SKILLS/video-use"
+VU="$REPO/skill/video-use"
 # ~/.local/bin: uv, yt-dlp, claude · /usr/lib/wsl/lib: nvidia-smi no WSL
 export PATH="$HOME/.local/bin:$PATH:/usr/lib/wsl/lib"
 cd "$REPO"
@@ -70,7 +70,12 @@ ln -sfn "$SKILL_SRC" "$SKILLS/corte-viral"
 ok "skill ligada a $SKILL_SRC (um 'git pull' no projeto atualiza a skill)"
 
 # ---------------------------------------------------------------------------------------
-step "3/7 Skill video-use (corta e renderiza os trechos)"
+step "3/7 Skill video-use (corta e renderiza os trechos) → $VU"
+# instalações antigas tinham o video-use direto em ~/.claude/skills: traz para dentro do projeto
+if [ ! -e "$VU" ] && [ -d "$SKILLS/video-use/.git" ] && [ ! -L "$SKILLS/video-use" ]; then
+  mv "$SKILLS/video-use" "$VU"
+  ok "video-use movido de $SKILLS/video-use para dentro do projeto"
+fi
 if [ -d "$VU/.git" ]; then
   git -C "$VU" pull --ff-only --quiet || aviso "não consegui atualizar o video-use (seguindo com a versão atual)"
   ok "video-use já instalado"
@@ -81,6 +86,13 @@ fi
 (cd "$VU" && uv sync --quiet)
 [ -f "$VU/.env" ] || cp "$VU/.env.example" "$VU/.env"
 ok "dependências do video-use"
+if [ -e "$SKILLS/video-use" ] && [ ! -L "$SKILLS/video-use" ]; then
+  bak="$SKILLS/video-use.bak-$(date +%Y%m%d-%H%M%S)"
+  mv "$SKILLS/video-use" "$bak"
+  aviso "já existia outro video-use em $SKILLS; guardei em $bak"
+fi
+ln -sfn "$VU" "$SKILLS/video-use"
+ok "skill ligada em $SKILLS/video-use"
 
 # ---------------------------------------------------------------------------------------
 step "4/7 Python da corte-viral (Whisper, OpenCV)"

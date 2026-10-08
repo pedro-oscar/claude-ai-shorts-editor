@@ -11,7 +11,8 @@ Fábrica de cortes virais: vídeo longo → reels 9:16 com rosto enquadrado, leg
 ## Peças
 - `./ae`: atalhos (`./ae ajuda`). O Claude pode rodar `./ae validar`, `./ae tsc`, `./ae still` e `./ae cena`. Quem roda `./ae produzir` e `./ae auto` é o usuário.
 - Transcrição: `skill/corte-viral/scripts/whisper_local.py`, com faster-whisper na GPU NVIDIA ou no processador.
-- Cortes horizontais: skill `video-use` (`~/.claude/skills/video-use`).
+- Cortes horizontais: skill `video-use` (`skill/video-use/`, clone de github.com/browser-use/video-use feito pelo instalador e ligado em `~/.claude/skills/video-use`).
+- Tudo o que o projeto usa fica dentro desta pasta: skills em `skill/`, ambientes Python em `skill/*/.venv`, Remotion em `remotion/`, skills oficiais do Remotion em `.claude/skills/`. Os links em `~/.claude/skills/` só apontam para cá.
 - Composição: `remotion/` (Remotion 4, criado pelo instalador a partir de `skill/corte-viral/template/`). Cada reel é `remotion/public/clips/<chave>/` → composição `reel-<chave>`. Cenas ilustradas em `remotion/src/scenes/`.
 - O posicionamento de textos e cards é automático (`remotion/src/motions/layout.ts`) e nunca cobre o rosto.
 
@@ -23,3 +24,4 @@ Fábrica de cortes virais: vídeo longo → reels 9:16 com rosto enquadrado, leg
 ## Regras
 - Antes de baixar conteúdo de terceiros, confirmar que há direito de uso.
 - Nunca colar a transcrição inteira no chat; ler `edit/takes_packed.md`.
+- No WSL, arquivos editados pelo app do Windows (`\\wsl.localhost\...`) podem ficar com dono root. Depois de editar, rode `wsl -d Ubuntu -u root chown -R <usuário>:<usuário> <pasta do projeto>`.

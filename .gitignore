@@ -10,7 +10,9 @@ publicar/*
 remotion/
 skill/corte-viral/.venv/
 skill/corte-viral/scripts/models/
+skill/video-use/
 .claude/skills/
+.claude/launch.json
 .agents/
 skills-lock.json
 
