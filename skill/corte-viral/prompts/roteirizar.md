@@ -15,9 +15,9 @@ O vídeo `{VIDEO}` já foi transcrito. A transcrição compacta está em `edit/t
 2. Escreva o roteiro em `{ROTEIRO}`, no formato de `references/roteiro.md`:
    - até **{CORTES}** cortes com `"status": "produzir"` (nota ≥ 7, categorias variadas); os demais bons candidatos como `"reserva"`;
    - `"fonte": "{VIDEO}"`;
-   - para cada corte: `trechos` enxutos (sem enrolação, começando no gancho), `titulo`, `enfase`, `motions` sincronizados com `word` + `at`, e `gancho`, `payoff`, `porque`, `nota`, `categoria`;
-   - duração ideal 35–60 s; **até 90 s só quando a história precisar**;
-   - o **último trecho termina numa frase completa** que fecha a ideia, sem corte seco no meio de raciocínio;
+   - para cada corte: `trechos` começando no gancho, sem enrolação, mas sem picotar (poucos trechos longos; tire só digressões, repetições e pausas mortas > 1 s), `titulo`, `enfase`, `motions` sincronizados com `word` + `at`, e `gancho`, `payoff`, `porque`, `nota`, `categoria`;
+   - duração **alvo 60–90 s**: contexto completo, desenvolvimento e payoff com espaço; abaixo de 45 s só se a ideia estiver completa. Máximo 90 s;
+   - o **último trecho termina numa frase completa** que fecha a ideia, sem corte seco no meio de raciocínio; o fim do trecho vai depois da pausa/reação que segue o payoff, não na última sílaba;
    - a posição dos motions é automática e nunca cobre o rosto: escolha só tipo, conteúdo e tempo. Textos curtos (título ≤ 5 palavras, keyword ≤ 2), nada nos últimos 0,8 s. Em plano fechado, prefira keyword/counter a cards;
    - `correcoes` globais para nomes próprios e termos que o Whisper errou.
 3. Se algum motion `scene` precisar de ilustração que não existe em `remotion/src/scenes/`, crie a cena:

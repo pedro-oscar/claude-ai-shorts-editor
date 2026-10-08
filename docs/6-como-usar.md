@@ -154,7 +154,7 @@ Abra http://localhost:3000 no navegador. Cada reel aparece como `reel-<chave>`, 
 - **Nomes difíceis?** Coloque no pedido: `--pedido "os nomes certos são Fulano de Tal e Empresa Exemplo"`. O Claude corrige a legenda.
 - **Gravações de tela** com a câmera num cantinho não ficam boas: o enquadramento segue o rosto e a tela some.
 - O Claude aprende com você. Quando você pede algo como "nunca use emoji nos títulos", ele pode guardar como regra para os próximos vídeos, em `skill/corte-viral/references/aprendizados.md`.
-- Os cortes ficam entre **35 e 60 segundos**, e chegam a **90 s** quando a história precisa. Terminam numa frase completa, com uma saída suave.
+- Os cortes ficam entre **60 e 90 segundos**, com o contexto completo. Terminam numa frase completa, com um respiro e uma saída suave.
 - Textos e animações **nunca ficam em cima do rosto**: o programa calcula o espaço livre sozinho.
 
 ---

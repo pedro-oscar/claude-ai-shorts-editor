@@ -7,7 +7,7 @@ Um corte bom é uma **mini-história completa**. Quem cai nele no feed não viu 
 | Parte | Função | Sinais de que existe |
 |---|---|---|
 | **Gancho** (0–3 s) | Parar o polegar | Frase de opinião forte ou contraintuitiva; número concreto ("R$ 18 mil pra pagar 7,5"); pergunta direta; promessa ("vou te contar o que ninguém conta"); nome forte (Musk, Copa, CLT); conflito ou tensão logo de cara |
-| **Desenvolvimento** | Dar o mínimo de contexto e manter a curiosidade | História com começo, meio e fim; exemplo concreto; dado que sustenta o gancho; sem digressão |
+| **Desenvolvimento** | Dar o contexto necessário e manter a curiosidade (há espaço: o alvo é 60–90 s) | História com começo, meio e fim; exemplo concreto; dado que sustenta o gancho; sem digressão |
 | **Payoff** | Recompensar quem ficou | Conclusão clara, *punchline*, virada, número final, frase de efeito, risada ou reação. O corte termina **logo depois**, numa frase completa (inclua a reação, se houver). Nunca termine no meio de um raciocínio nem num "e…", "então…", "porque…" |
 
 ## Nota (0–10 em cada; nota final = média ponderada)
@@ -27,7 +27,7 @@ Só proponha cortes com nota final ≥ 6. Prefira variedade de categorias.
 
 ## Descartar
 
-- Depende de algo dito antes ("como eu falei", "aquele cara") e não dá para incluir o contexto em até 10 s.
+- Depende de algo dito antes ("como eu falei", "aquele cara") e não dá para incluir o contexto em até 20 s.
 - Termina sem conclusão ou no meio de uma ideia.
 - Piada interna ou referência que só os participantes entendem.
 - Acusação grave a pessoa identificável sem contexto, ou dado sensível de terceiros.
@@ -38,7 +38,7 @@ Só proponha cortes com nota final ≥ 6. Prefira variedade de categorias.
 ```markdown
 | id | início–fim | dur | gancho (frase exata) | payoff | categoria | nota |
 |----|-----------|-----|----------------------|--------|-----------|------|
-| c01 | 1:08:12–1:09:05 | 53s | "Ninguém te conta isso: a maioria quebra no segundo ano" | "Quem controla o caixa sobrevive." | conselho-pratico | 8.4 |
+| c01 | 1:08:12–1:09:24 | 72s | "Ninguém te conta isso: a maioria quebra no segundo ano" | "Quem controla o caixa sobrevive." | conselho-pratico | 8.4 |
 ```
 
 Abaixo da tabela, para cada corte, 1–2 linhas sobre o porquê e o que cortar de dentro (enrolação, digressão).

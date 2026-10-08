@@ -52,9 +52,11 @@ VIDEO_USE = _achar_video_use()
 VU_PY = VIDEO_USE / ".venv" / "bin" / "python"
 FPS = 30
 
-RESPIRO_FINAL = 0.75  # s de respiro depois da última palavra do corte
-FIM_LIVRE = 0.6  # s finais sem motion (saída suave: escurece e o áudio baixa)
+RESPIRO_FINAL = 1.2  # s de som natural (reação, riso, respiro) aproveitados depois da última palavra
+CAUDA_MIN = 1.0  # s mínimos entre a última palavra e o fim do reel; o que faltar vira quadro congelado
+FIM_LIVRE = 0.8  # s finais sem motion (saída suave: escurece e o áudio baixa)
 DUR_MAX = 90.0
+DUR_CURTO = 45.0  # abaixo disso a validação avisa: o alvo é 60–90 s
 
 DUR_PADRAO = {"title": 2.6, "keyword": 1.6, "counter": 2.4, "zoom": 1.4, "shake": 1.0, "scene": 3.5}
 REGIAO = {"title": "topo", "keyword": "meio", "counter": "meio", "scene": "cena"}
@@ -165,11 +167,12 @@ class Roteiro:
         return f"{self.prefixo}-{slug(corte['id'], 20)}"
 
 
-def ajustar_trecho(palavras: list[dict], a: float, b: float, final: bool = False) -> tuple[float, float, list[str]]:
+def ajustar_trecho(palavras: list[dict], a: float, b: float, final: bool = False) -> tuple[float, float, float, list[str]]:
     """Expande/encolhe [a, b] para limites de palavra, com folga de respiro.
 
     No trecho final do corte a folga depois da última palavra é maior (até RESPIRO_FINAL s, sem
     invadir a próxima palavra): o reel termina num respiro natural, não seco na última sílaba.
+    Devolve (ini, fim, fim da última palavra, avisos).
     """
     avisos = []
     dentro = []
@@ -191,7 +194,7 @@ def ajustar_trecho(palavras: list[dict], a: float, b: float, final: bool = False
     # no trecho final, estender até RESPIRO_FINAL além da última palavra é esperado, não vale aviso
     if abs(ini - a) > 0.6 or (fim - b > (RESPIRO_FINAL + 0.6 if final else 0.6)) or b - fim > 0.6:
         avisos.append(f"trecho {a:.2f}–{b:.2f} ajustado para {ini:.2f}–{fim:.2f} (\"{w0['text']} … {w1['text']}\")")
-    return round(ini, 3), round(fim, 3), avisos
+    return round(ini, 3), round(fim, 3), w1["end"], avisos
 
 
 class Plano:
@@ -206,18 +209,25 @@ class Plano:
         if not trechos:
             raise Problema(f"{self.id}: sem trechos")
         self.ranges = []
+        fala_fim = 0.0
         for n, t in enumerate(trechos):
             a, b = tempo(t[0]), tempo(t[1])
             if not (0 <= a < b <= rot.duracao + 1):
                 raise Problema(f"{self.id}: trecho {t} fora do vídeo (0–{rot.duracao:.0f}s)")
-            ini, fim, av = ajustar_trecho(rot.palavras, a, b, final=(n == len(trechos) - 1))
+            ini, fim, fala_fim, av = ajustar_trecho(rot.palavras, a, b, final=(n == len(trechos) - 1))
             self.avisos += av
             self.ranges.append((ini, fim))
-        self.duracao = sum(b - a for a, b in self.ranges)
-        if self.duracao > DUR_MAX + 0.5:
-            raise Problema(f"{self.id}: {self.duracao:.1f}s — o máximo é {DUR_MAX:.0f}s; enxugue os trechos")
-        if self.duracao < 20:
-            self.avisos.append(f"duração {self.duracao:.1f}s (curto demais; o ideal é 35–60s, até 90s quando necessário)")
+        self.duracao = sum(b - a for a, b in self.ranges)  # duração do corte horizontal (cut.mp4)
+        # saída: a fala acaba em fim_fala; se o som natural depois dela for curto (o falante emenda
+        # a próxima frase), o Remotion congela o último quadro em silêncio até completar CAUDA_MIN
+        respiro = max(0.0, self.ranges[-1][1] - fala_fim)
+        self.fim_fala = round(self.duracao - respiro, 3)
+        self.congelar = round(max(0.0, CAUDA_MIN - respiro), 3)
+        self.total = self.duracao + self.congelar  # duração do reel
+        if self.total > DUR_MAX + 0.5:
+            raise Problema(f"{self.id}: {self.total:.1f}s — o máximo é {DUR_MAX:.0f}s; enxugue os trechos")
+        if self.total < DUR_CURTO:
+            self.avisos.append(f"duração {self.total:.1f}s (curto; o alvo é 60–90s — inclua o contexto e deixe o payoff respirar)")
         self.edl = {
             "sources": {rot.stem: str(rot.fonte)},
             "ranges": [{"source": rot.stem, "start": a, "end": b} for a, b in self.ranges],
@@ -288,14 +298,15 @@ class Plano:
                 fim = self.mapear(tempo(m.pop("ate")))
             else:
                 fim = ini + float(m.pop("dur", DUR_PADRAO[tipo]))
-            fim = min(fim, self.duracao - FIM_LIVRE)  # os últimos instantes são da saída suave
+            fim = min(fim, self.fim_fala + 0.3, self.total - FIM_LIVRE)  # depois da fala é a saída suave
             if fim - ini < 0.3:
                 raise Problema(f"{self.id}: motion #{i + 1} ({tipo}) curto demais ou fora do corte")
             m.pop("dur", None)
             saida.append({**m, "type": tipo, "start": round(ini, 3), "end": round(fim, 3)})
         self._checar_sobreposicao(saida)
         estilo = {**self.rot.estilo, **(self.corte.get("estilo") or {})}
-        return {"style": estilo, "emphasis": self.corte.get("enfase") or [], "motions": saida}
+        return {"style": estilo, "emphasis": self.corte.get("enfase") or [], "motions": saida,
+                "saida": {"fimFala": self.fim_fala, "congelar": self.congelar}}
 
     def _checar_sobreposicao(self, ms: list[dict]) -> None:
         for i, a in enumerate(ms):
@@ -427,8 +438,8 @@ def resumo_md(rot: Roteiro, planos: list[Plano], erros: dict[str, str]) -> str:
               "| id | chave | duração | trechos (fonte) | título | nota | motions |",
               "|---|---|---|---|---|---|---|"]
     for p in planos:
-        tr = ", ".join(f"{a / 60:.0f}:{a % 60:04.1f}–{b / 60:.0f}:{b % 60:04.1f}" for a, b in p.ranges)
-        linhas.append(f"| {p.id} | `{p.chave}` | {p.duracao:.0f}s | {tr} | {p.corte.get('titulo', '')} | "
+        tr = ", ".join(f"{int(a // 60)}:{a % 60:04.1f}–{int(b // 60)}:{b % 60:04.1f}" for a, b in p.ranges)
+        linhas.append(f"| {p.id} | `{p.chave}` | {p.total:.0f}s | {tr} | {p.corte.get('titulo', '')} | "
                       f"{p.corte.get('nota', '')} | {len(p.motion['motions'])} |")
     for c in d.get("cortes", []):
         if c["id"] in erros:
@@ -484,7 +495,7 @@ def main() -> None:
             if faltando:
                 raise Problema(f"cena(s) não registrada(s) em remotion/src/scenes/index.ts: {', '.join(sorted(faltando))}")
             planos.append(p)
-            print(f"  {cor('✓', 'verde')} {p.id} → {p.chave}  {p.duracao:.1f}s  {len(p.ranges)} trecho(s)  {len(p.motion['motions'])} motion(s)")
+            print(f"  {cor('✓', 'verde')} {p.id} → {p.chave}  {p.total:.1f}s  {len(p.ranges)} trecho(s)  {len(p.motion['motions'])} motion(s)")
             for a in p.avisos:
                 print(f"      {cor('⚠', 'amarelo')} {a}")
         except Problema as e:

@@ -82,9 +82,9 @@ Para cada corte:
 
 - **`trechos`:**
   - Comece no gancho mais forte. *Cold open* é permitido se não distorcer o sentido.
-  - Divida em vários trechos para tirar enrolação, digressões e falsos começos (> 0,7 s de "lixo").
-  - Duração: ideal 35–60 s; **até 90 s só quando a história precisar** (contexto + desenvolvimento + payoff não cabem em menos). Acima de 90 s a validação falha.
-  - **Final sem corte seco:** o último trecho termina numa frase completa que fecha a ideia, de preferência seguida de uma pausa natural (reação, riso, respiro). O produzir acrescenta respiro e saída suave; a validação avisa se o corte acabar sem fim de frase.
+  - Tire só o que é lixo de verdade: digressões, falsos começos, repetições e pausas mortas (> 1 s). Prefira **poucos trechos longos** a muitos picotes: pausas curtas e o ritmo natural da fala ficam.
+  - Duração: **alvo 60–90 s**. Use o tempo para dar o contexto completo, desenvolver e deixar o payoff respirar; não encurte uma boa história para caber num número. Abaixo de 45 s só se a ideia estiver realmente completa (a validação avisa). Acima de 90 s a validação falha.
+  - **Final sem corte seco:** o último trecho termina numa frase completa que fecha a ideia, de preferência seguida de uma pausa natural (reação, riso, respiro). Ponha o fim do trecho **depois** da pausa, não na última sílaba. O produzir aproveita até 1,2 s do som depois da última palavra, congela o último quadro se o falante emendar outra frase, e só então escurece; a validação avisa se o corte acabar sem fim de frase.
   - O produzir ajusta os limites às palavras, então tempos aproximados de frase bastam.
 - **`titulo`:** manchete do gancho, até 6 palavras, sem repetir a primeira frase.
 - **`enfase`:** de 3 a 8 palavras-chave da legenda.

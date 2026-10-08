@@ -64,6 +64,15 @@ export type MotionPlan = {
   /** palavras que aparecem na cor accent na legenda (comparação sem acento/caixa) */
   emphasis?: string[];
   motions: Motion[];
+  /** fim do reel, calculado pelo produzir.py */
+  saida?: Saida;
+};
+
+export type Saida = {
+  /** s (linha do tempo do corte) em que termina a última palavra; o fade só começa depois dela */
+  fimFala: number;
+  /** s de último quadro congelado, em silêncio, depois do fim do cut.mp4 */
+  congelar: number;
 };
 
 export type ReelData = {

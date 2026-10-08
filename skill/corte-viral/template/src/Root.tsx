@@ -25,7 +25,7 @@ const calculateMetadata: CalculateMetadataFunction<ReelProps> = async ({props}) 
     plan: await loadJson(`${base}/motion.json`, {motions: []}),
   };
   return {
-    durationInFrames: Math.max(1, Math.ceil(data.clip.durationSec * FPS)),
+    durationInFrames: Math.max(1, Math.ceil((data.clip.durationSec + (data.plan.saida?.congelar ?? 0)) * FPS)),
     props: {...props, data},
   };
 };
